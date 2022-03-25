@@ -1,0 +1,550 @@
+body,
+html {
+  padding: 0;
+  margin: 0;
+  font-size: 32px;
+  color: #1e1e1e;
+  background-color: #000;
+  overflow-x: hidden;
+  display: block;
+}
+
+::selection {
+  color: rgb(49, 49, 49);
+  background: rgb(255, 255, 255);
+}
+
+@font-face {
+  font-family: "Gilroy Bold";
+  src: url(../static/fonts/Gilroy-ExtraBold.otf);
+}
+
+@font-face {
+  font-family: "Gilroy Light";
+  src: url(../static/fonts/Gilroy-Light.otf);
+}
+
+h1 {
+  color: #8958ff;
+  font-size: 1.5rem;
+  font-family: "Gilroy Bold", sans-serif;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  line-height: 1.7rem;
+}
+
+h3 {
+  color: rgb(255, 245, 232);
+  font-family: "Gilroy Bold", sans-serif;
+  margin: 0.6rem 0;
+}
+
+section {
+  background-color: #121212;
+  color: #c6ff40;
+  position: relative;
+  font-size: 0.6rem;
+  line-height: 1rem;
+  padding: 2rem 8vw;
+  font-weight: 300;
+  box-sizing: border-box;
+  color: #eee;
+  font-family: "Open Sans", sans-serif;
+  transition: 0.5s;
+}
+
+section:nth-of-type(2n) {
+  background-color: #1c1b22;
+}
+
+form {
+  margin-top: 0.5rem;
+}
+
+input {
+  font-size: 0.6rem;
+  color: #fff;
+  margin-right: 0.25rem;
+}
+
+label {
+  font-weight: 400;
+  font-size: 18px;
+}
+
+input[type="number"],
+input[type="text"] {
+  margin-right: 0.25rem;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.25rem 0.5rem;
+  background-color: rgb(53, 53, 53);
+  font-family: "Roboto Mono", sans-serif;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 1);
+  width: 3rem;
+  transition: 0.2s;
+  height: 40px;
+}
+
+input[type="number"]:focus,
+input[type="text"]:focus {
+  transition: 0.3s;
+  outline: none;
+  background-color: rgb(70, 70, 70);
+}
+
+/* CSS */
+input[type="button"] {
+  background-color: #cf245f;
+  height: 40px;
+  border-radius: 6px;
+  background-color: #7f53ac;
+  background-image: linear-gradient(315deg, #7f53ac 0%, #647dee 74%);
+  margin-right: 0.5rem;
+  border: 0;
+  box-sizing: border-box;
+  color: rgb(46, 0, 126);
+  cursor: pointer;
+  font-family: "Gilroy Bold", ui-sans-serif, system-ui, -apple-system, system-ui,
+    "Segoe UI";
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1rem; /* 28px */
+  padding: 0 16px;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  position: relative;
+  box-shadow: 0px 0px 4px #000000;
+  transition: 0.3s;
+}
+
+/* section::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(to bottom, red, orange);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.4s linear;
+}
+
+section:hover::before {
+    opacity: 1;
+  } */
+
+input[type="button"]:hover {
+  color: #ffffff;
+  box-shadow: #647dee;
+  box-shadow: 0px 0px 8px #647dee;
+}
+
+input[type="reset"] {
+  height: 40px;
+  background-color: rgba(75, 75, 75, 0);
+  border: 0;
+  color: #898b8e;
+  font-family: "Gilroy light";
+  font-size: 18px;
+  border-radius: 6px;
+  padding: 0 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+input[type="reset"]:hover {
+    /* box-shadow: 0px 0px 8px #000000; */
+    background-color: rgba(75, 75, 75, 0.414);
+    color: #d8d8d8;
+}
+
+/* 
+input[type=reset] {
+    background-color: #bb86fc;
+    color: black;
+}
+
+input[type=button]:hover {
+    background-color: #ff4f84
+}
+
+input[type=reset]:hover {
+    background-color: #cca2ff
+} */
+
+.inputStyle2 {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 6.5rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 1);
+  margin-bottom: 0.5rem;
+}
+
+.inputStyle2 label {
+  color: black;
+  background-color: #dab6fc;
+  width: 1rem;
+  height: 40px;
+  text-align: center;
+  border-radius: 6px 0px 0px 6px;
+  transition: 0.3s;
+  box-sizing: border-box;
+  font-family: "Roboto mono", monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputStyle2 input[type="number"],
+.inputStyle2 input[type="text"] {
+  flex-grow: 1;
+  margin: 0;
+  border-radius: 0px 6px 6px 0px;
+  box-shadow: none;
+}
+
+.userProvided {
+  transition: 0.3;
+  background-color: violet !important;
+}
+
+.computed {
+  transition: 0.3;
+  background-color: rgb(126, 71, 255) !important;
+}
+
+.inputStyle2 label i {
+  display: none;
+  font-size: 0.8rem;
+}
+
+.inputStyle2 label.warn i {
+  display: inline;
+}
+
+.inputStyle2 label.warn span {
+  display: none;
+}
+
+.warn {
+  background-color: rgb(255, 71, 105) !important;
+  transition: 0.6s;
+}
+
+a {
+  color: #8958ff;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.GraphGeneral {
+  cursor: grab;
+  border-radius: 16px;
+  box-shadow: 5px 6px 20px #000000;
+  background-color: #1f1c22;
+}
+
+.sectionOut {
+  font-weight: 400;
+  color: #fff;
+  margin-top: 0.5rem;
+}
+
+.MathJax {
+  /* color: rgb(255, 208, 0) !important; */
+  color: white !important;
+}
+
+.mathInput {
+  font-family: serif;
+  font-size: 0.8rem;
+  line-height: 2rem;
+}
+
+.mathInput input[type="number"] {
+  width: 80px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+#quoteWrapper {
+  font-size: 1rem;
+  font-family: "Dancing Script", cursive;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+#quoteBy {
+  font-size: 0.8rem;
+  color: rgb(255, 217, 0);
+  position: relative;
+  /* font-family: 'Open Sans'; */
+  font-weight: 400;
+}
+
+#contextMenu {
+  position: absolute;
+  z-index: 9999;
+  display: none;
+  /* border: 3px solid pink; */
+  font-size: 0.5rem;
+  font-family: sans-serif;
+  padding: 5px 0;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px 0 rgb(0 0 0 / 20%) !important;
+  color: #5f6368;
+}
+
+.contextMenuItems {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contextMenuItems li {
+  padding: 4px 16px;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.contextMenuItems li:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.contextMenuActive {
+  display: block !important;
+}
+
+.toastAlert {
+  font-family: "Open Sans", sans-serif;
+  position: fixed;
+  bottom: 20px;
+  right: -350px;
+  width: 300px;
+  /* height: 70px; */
+  background: rgb(123, 52, 255);
+  box-shadow: 0px 0px 15px 7px rgb(0 0 0 / 15%) !important;
+  border-radius: 10px;
+  animation: popupRise 0.3s both, popupRise 0.3s 3.4s reverse forwards;
+  padding: 12px 18px;
+  color: white;
+  z-index: 999;
+}
+
+.toastAlert h2 {
+  margin: 0;
+  margin-bottom: 5px;
+  padding: 0;
+  font-size: 0.9rem;
+}
+
+.toastExp {
+  font-size: 0.45rem;
+  width: 100%;
+}
+
+.toastNoOverflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@keyframes popupRise {
+  0% {
+    right: -350px;
+  }
+  100% {
+    right: 20px;
+  }
+}
+
+.go {
+  /* margin-top: 0.25rem; */
+  display: inline-block;
+}
+
+.flexForm {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -0.25rem 0;
+  margin-top: 0.25rem;
+}
+
+.flexForm > * {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.flexForm input[type="number"]:last-of-type {
+  margin-right: 1rem;
+}
+
+.buttonsWrapper {
+  display: flex;
+}
+
+.gearWrapper i {
+  color: black;
+  font-size: 27px;
+  transition: 0.3s;
+}
+
+.gearWrapper:hover i {
+  transform: rotateZ(60deg);
+  transition: 0.3s;
+}
+
+.gearWrapper {
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.graphContainer {
+  height: 440px;
+  margin: 0.5rem 0;
+  display: none;
+}
+
+#svgContainer {
+  position: relative;
+}
+
+.graphScale {
+  position: absolute;
+  /* border: 2px solid blue; */
+  background: rgba(107, 119, 255, 0.733);
+  border-radius: 5px;
+  top: 5px;
+  right: 5px;
+  font-size: 0.5rem;
+  padding: 1px 4px;
+  color: white;
+  display: none;
+}
+
+footer {
+  font-size: 0.36rem;
+  color: #eeeeee;
+  font-family: "Open Sans", sans-serif;
+  padding: 1rem 8vw;
+  /* background-color: rgb(7, 0, 31); */
+  background: linear-gradient(
+      0deg,
+      rgba(1, 0, 24, 0.657) 0%,
+      rgba(9, 9, 121, 0) 66%
+    ),
+    linear-gradient(180deg, rgba(1, 0, 15, 0.883) 0%, rgba(9, 9, 121, 0) 66%),
+    url("../static/img/perlinFallback.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.footerLogoAndText {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+footer svg {
+  margin-right: 0.5rem;
+}
+
+footer .logoText {
+  font-size: 1rem;
+}
+
+.footerPromo {
+  margin: 1rem 0;
+  font-size: 0.7rem;
+}
+
+.footerPromo a {
+  font-family: "Gilroy Bold";
+}
+
+.footerPromo span {
+  font-size: 0.4rem;
+  font-family: "Roboto Mono", monospace;
+  color: #9b9b9b;
+  display: block;
+  margin-top: -0.04rem;
+}
+
+.footerPromo img {
+  height: 1.3rem;
+  margin-bottom: -0.4rem;
+}
+
+footer b {
+  font-family: "Gilroy Bold";
+  color: #8958ff;
+  font-style: normal;
+}
+
+@media only screen and (max-width: 600px) {
+  html,
+  body {
+    font-size: 24px;
+  }
+  section {
+    font-size: 0.7rem;
+  }
+  input[type="number"],
+  input[type="text"] {
+    margin-right: 5px;
+    border-radius: 5px;
+    padding: 3px 10px;
+    background-color: rgb(49, 49, 49);
+    font-family: "Open Sans", sans-serif;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 1);
+    width: 80px;
+    transition: 0.2s;
+  }
+  .inputStyle2 label {
+    width: 1.3rem;
+  }
+  h3 {
+    font-size: 1rem;
+  }
+  footer {
+    font-size: 0.5rem;
+  }
+  footer svg {
+    margin-bottom: 0.5rem;
+  }
+  footer .logoText {
+    font-size: 5vw;
+  }
+  .footerPromo {
+    font-size: 0.8rem;
+  }
+  .footerPromo span {
+    font-size: 0.5rem;
+  }
+}
