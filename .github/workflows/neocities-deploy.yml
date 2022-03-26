@@ -1,0 +1,19 @@
+name: Neocities deploy
+on:
+  push:
+    branches: [main]
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - name: Deploy to neocities
+        uses: bcomnes/deploy-to-neocities@v1
+        with:
+           api_token: ${{ secrets.NEOCITIES_API_TOKEN }}
+           cleanup: true
+           dist_dir: dist
