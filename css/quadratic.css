@@ -1,0 +1,53 @@
+.quad {
+    width: 100px;
+}
+
+
+
+#quadinp3{
+    margin-right: 1rem;
+}
+
+#quadForm label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#quadOutOuterWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+#quadOutInnerWrapper {
+    flex-grow: 1;
+}
+
+#quadraticOut {
+    margin-right: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+@media only screen and (max-width: 600px) {
+    #quadraticGraph,
+    #quadOutOuterWrapper #svgContainer {
+        width: 300px;
+        height: 300px;
+    }
+    #quadOutOuterWrapper {
+        flex-direction: column-reverse;
+    }
+}
+
+.intersection {
+    display: none;
+    stroke: #ffd100;
+}
+
+.graphLabel {
+    fill: white;
+    font-weight: 400;
+    font-size: 14px;
+}

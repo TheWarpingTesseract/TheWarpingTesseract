@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Math stuff which you can't get yourself to hate.">
+    <link rel='icon' href='favicon.ico' type='image/x-icon'>
+    <title>TheWarpingTesseract</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=Dancing+Script:wght@500&family=Roboto+Mono&family=Jost:wght@150;500&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/preview.css">
+    <link rel="stylesheet" href="css/triangle.css">
+    <link rel="stylesheet" href="css/quadratic.css">
+    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="css/genExp.css">
+    <link rel="stylesheet" href="css/collatz.css">
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js" integrity="sha256-qXBd/EfAdjOA2FGrGAG+b3YBn2tn5A6bhz+LSgYD96k=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"
+        integrity="sha256-bC3LCZCwKeehY6T4fFi9VfOU0gztUa+S4cnkIhVPZ5E=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
+
+    <!-- mathjax config -->
+    <script>
+        MathJax = {
+            loader: {
+                load: ["input/tex", "output/chtml"]
+            }
+        };
+    </script>
+    <!-- <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js"> -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </script>
+</head>
+
+<body onmouseup="svgPanAbort();">
+
+    <!-- all svg defs here -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="display: none;">
+        <defs>
+            <g id="Exclamation-mark">
+                <circle fill-rule="evenodd" clip-rule="evenodd" cx="31.9990997" cy="48.9999504" r="2.9999499"
+                    fill='#891212' />
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M32,0c-17.6730995,0-32,14.3268995-32,32s14.3268995,32,32,32
+		s32-14.3269005,32-32S49.6730995,0,32,0z M32,62c-16.5419998,0-30-13.457901-30-30c0-16.5419998,13.4579992-30,30-30
+		c16.542099,0,30,13.4580002,30,30C62,48.542099,48.542099,62,32,62z" fill='#891212' />
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M31.1189003,42h1.7622986c0.5373001,0,0.9785995-0.4245987,0.9993019-0.9614983
+		l1.0794983-28.0000019C34.9818993,12.4715996,34.5280991,12,33.960701,12h-3.9212914
+		c-0.5674095,0-1.0212097,0.4715996-0.9993095,1.0384998l1.0795002,28.0000019C30.1403008,41.5754013,30.5816002,42,31.1189003,42z" fill='#891212' />
+            </g>
+
+            <g id='logoSvg' transform="translate(0.000000,2000.000000) scale(0.100000,-0.100000)" fill="#fff"
+                stroke="none">
+                <path d="M7998 18912 c-1039 -592 -1888 -1079 -1888 -1082 0 -3 851 -502 1890
+-1108 l1890 -1102 1875 1082 c1031 595 1875 1085 1875 1088 0 4 -3646 2139
+-3734 2186 -19 10 -243 -115 -1908 -1064z" />
+                <path d="M14009 17290 c-19 -16 -890 -518 -1935 -1115 -1044 -598 -1902 -1090
+-1907 -1094 -10 -9 31 -4813 41 -4823 4 -4 931 -547 2060 -1207 l2052 -1201
+1930 1147 c1062 631 1930 1150 1930 1153 0 3 -930 510 -2067 1126 l-2068 1121
+4 2462 c2 1353 2 2461 0 2461 -2 -1 -20 -14 -40 -30z" />
+                <path d="M5745 17301 c-3 -6 4 -1116 15 -2468 18 -2151 19 -2459 6 -2468 -8
+-6 -935 -526 -2060 -1155 -1125 -630 -2046 -1147 -2046 -1150 0 -3 855 -502
+1900 -1108 l1900 -1102 2047 1191 c1127 654 2052 1194 2057 1199 5 5 5 1045 0
+2431 l-9 2422 -1885 1099 c-1037 604 -1893 1103 -1902 1108 -11 7 -19 7 -23 1z" />
+                <path d="M3230 16190 l-1915 -1097 4 -1539 c2 -847 7 -1857 10 -2245 l6 -706
+1886 1076 c1037 592 1895 1083 1907 1091 l22 15 -2 2251 -3 2251 -1915 -1097z" />
+                <path d="M14651 17216 c-9 -10 -6 -577 9 -2222 11 -1215 24 -2212 28 -2216 4
+-3 858 -472 1897 -1041 l1890 -1034 7 1516 c4 834 7 1806 5 2160 l-2 644
+-1895 1094 c-1042 602 -1902 1098 -1911 1103 -12 7 -20 5 -28 -4z" />
+                <path d="M7835 8538 c-1144 -655 -2085 -1191 -2091 -1191 -9 0 -13 -296 -18
+-1106 -3 -608 -9 -1610 -12 -2225 l-6 -1119 53 30 c30 17 971 529 2091 1137
+l2038 1106 2022 -1126 c1113 -619 2042 -1137 2066 -1150 l42 -25 -2 2232 -3
+2232 -2040 1194 c-1122 657 -2044 1197 -2050 1198 -5 2 -946 -532 -2090 -1187z" />
+                <path d="M18471 9611 c-13 -9 -879 -527 -1925 -1152 l-1901 -1136 -2 -654 c-2
+-360 1 -1350 5 -2200 l7 -1547 1930 1072 1930 1073 -4 1579 c-2 868 -7 1895
+-10 2280 l-6 701 -24 -16z" />
+                <path d="M1290 9507 c0 -18 9 -1027 20 -2243 20 -2203 20 -2209 41 -2223 31
+-22 3714 -2099 3716 -2097 7 6 82 4361 76 4367 -19 19 -3825 2229 -3838 2229
+-10 0 -15 -10 -15 -33z" />
+                <path d="M7947 3441 c-1071 -580 -1947 -1058 -1947 -1061 0 -3 887 -508 1970
+-1123 l1970 -1117 1865 1107 c1026 609 1865 1110 1865 1113 0 4 -3131 1777
+-3720 2106 l-55 31 -1948 -1056z" />
+            </g>
+        </defs>
+    </svg>
+
+    <!-- landing -->
+    <div class='landing' id='landing'>
+        <div class="landingCanvasContainer" id="landingCanvasContainer">
+            <div class="landingCanvasOverlay"></div>
+        </div>
+        <div id='landingTitleWrapper'>
+            <div id="landingLogo">
+                <svg version="1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"
+                    width="100%" viewBox="0 0 2000 2000" preserveAspectRatio="xMidYMid meet">
+
+                    <g transform="translate(0.000000,2000.000000) scale(0.100000,-0.100000)" fill="#fff" stroke="none">
+                        <path d="M7998 18912 c-1039 -592 -1888 -1079 -1888 -1082 0 -3 851 -502 1890
+-1108 l1890 -1102 1875 1082 c1031 595 1875 1085 1875 1088 0 4 -3646 2139
+-3734 2186 -19 10 -243 -115 -1908 -1064z" />
+                        <path d="M14009 17290 c-19 -16 -890 -518 -1935 -1115 -1044 -598 -1902 -1090
+-1907 -1094 -10 -9 31 -4813 41 -4823 4 -4 931 -547 2060 -1207 l2052 -1201
+1930 1147 c1062 631 1930 1150 1930 1153 0 3 -930 510 -2067 1126 l-2068 1121
+4 2462 c2 1353 2 2461 0 2461 -2 -1 -20 -14 -40 -30z" />
+                        <path d="M5745 17301 c-3 -6 4 -1116 15 -2468 18 -2151 19 -2459 6 -2468 -8
+-6 -935 -526 -2060 -1155 -1125 -630 -2046 -1147 -2046 -1150 0 -3 855 -502
+1900 -1108 l1900 -1102 2047 1191 c1127 654 2052 1194 2057 1199 5 5 5 1045 0
+2431 l-9 2422 -1885 1099 c-1037 604 -1893 1103 -1902 1108 -11 7 -19 7 -23 1z" />
+                        <path d="M3230 16190 l-1915 -1097 4 -1539 c2 -847 7 -1857 10 -2245 l6 -706
+1886 1076 c1037 592 1895 1083 1907 1091 l22 15 -2 2251 -3 2251 -1915 -1097z" />
+                        <path d="M14651 17216 c-9 -10 -6 -577 9 -2222 11 -1215 24 -2212 28 -2216 4
+-3 858 -472 1897 -1041 l1890 -1034 7 1516 c4 834 7 1806 5 2160 l-2 644
+-1895 1094 c-1042 602 -1902 1098 -1911 1103 -12 7 -20 5 -28 -4z" />
+                        <path d="M7835 8538 c-1144 -655 -2085 -1191 -2091 -1191 -9 0 -13 -296 -18
+-1106 -3 -608 -9 -1610 -12 -2225 l-6 -1119 53 30 c30 17 971 529 2091 1137
+l2038 1106 2022 -1126 c1113 -619 2042 -1137 2066 -1150 l42 -25 -2 2232 -3
+2232 -2040 1194 c-1122 657 -2044 1197 -2050 1198 -5 2 -946 -532 -2090 -1187z" />
+                        <path d="M18471 9611 c-13 -9 -879 -527 -1925 -1152 l-1901 -1136 -2 -654 c-2
+-360 1 -1350 5 -2200 l7 -1547 1930 1072 1930 1073 -4 1579 c-2 868 -7 1895
+-10 2280 l-6 701 -24 -16z" />
+                        <path d="M1290 9507 c0 -18 9 -1027 20 -2243 20 -2203 20 -2209 41 -2223 31
+-22 3714 -2099 3716 -2097 7 6 82 4361 76 4367 -19 19 -3825 2229 -3838 2229
+-10 0 -15 -10 -15 -33z" />
+                        <path d="M7947 3441 c-1071 -580 -1947 -1058 -1947 -1061 0 -3 887 -508 1970
+-1123 l1970 -1117 1865 1107 c1026 609 1865 1110 1865 1113 0 4 -3131 1777
+-3720 2106 l-55 31 -1948 -1056z" />
+                    </g>
+
+                </svg>
+            </div>
+            <div class="lightsAndLogoWrapper">
+                <div id='landingLightsWrapper'>
+                </div>
+                <div class='big'>
+                    <div id='landingLogoWrapper'>
+                        <div class='logoText'><span class='logoTextBig'>T</span> H E <span class='logoTextBig'>W</span>
+                            A R P I N G <span style="position:relative; margin: 0;padding: 0;"><span
+                                    class='logoTextTesseract'><span class='logoTextBig'>T</span> E S S E R A C T
+                                </span>
+                                <div class="logoTextTesseractDouble"><span class='logoTextBig'>T</span> E S S E R A C T
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <svg class='doubleDown' xmlns="http://www.w3.org/2000/svg" width="30" fill="fff" viewBox="0 0 16 16">
+            <path fill='#fff'
+                d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+            <path fill='#fff'
+                d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+        </svg>
+    </div>
+
+    <section>
+        <!-- <h1>Triangle Calculator</h1> -->
+        <h1></h1>
+        <div id="triangleAppWrapper">
+            <div id='triangleSvgContainer2'>
+                <div class="switcherWrapper">
+                    <div class="Switcher" onclick="degRadSwitch();">
+                        <span class='active'>DEG</span>
+                        <span>RAD</span>
+                    </div>
+                    <div class="Switcher" onclick="decimalExpSwitch();">
+                        <span class='active'>DEC</span>
+                        <span>EXP</span>
+                    </div>
+                </div>
+                <svg id='triangleSVG' class='GraphGeneral' height="100%" viewBox="0 0 600 400">
+                    <g transform="translate(300, 400) scale(1, -1)" id='triangleContainer' class='triangleBlur'>
+                    </g>
+                </svg>
+                <div class='triangleError'>
+                    <svg viewBox='0 0 64 64' style="flex-shrink: 0;">
+                        <use xlink:href="#Exclamation-mark" />
+                    </svg>
+                    <div class='triangleErrorMessageWrapper'>
+                        <div class='triangleErrorHeading'>
+                            YIKES!
+                        </div>
+                        <div class='triangleErrorMessage'>
+                            Nasty error message here.
+                        </div>
+                    </div>
+                </div>
+                <div class='triangleWelcomeMessageWrapper'>
+                    <div id='triangleTextFace'>
+                    </div>
+                    <div id='triangleWelcomeMessage'>
+                        Provide sufficient information to determine a triangle, and we'll calculate the rest.
+                    </div>
+                    <div id="triangleNotice">
+                        Still a work in progress. Certain combinations of inputs may not be recognized despite uniquely
+                        identifying a triangle.
+                    </div>
+                </div>
+            </div>
+
+            <form id='triangleForm' spellcheck="false" autocomplete=off>
+                <div>
+                    <div>
+                        <h3>Side lengths</h3>
+                        <div class='inputStyle2'>
+                            <input value='' type="text" id='triangleForma'
+                                onkeydown="setTimeout(()=>{triangleCalc(0); return false}, 20)"><label
+                                for="triangleForma"><i class="ri-alert-fill"></i><span>a</span></label>
+                        </div>
+                        <div class='inputStyle2'>
+                            <input value='' type="text" id='triangleFormb'
+                                onkeydown="setTimeout(()=>{triangleCalc(1); return false}, 20)"><label
+                                for="triangleFormb"><i class="ri-alert-fill"></i><span>b</span></label>
+                        </div>
+                        <div class='inputStyle2'>
+                            <input value='' type="text" id='triangleFormc'
+                                onkeydown="setTimeout(()=>{triangleCalc(2); return false}, 20)"><label
+                                for="triangleFormc"><i class="ri-alert-fill"></i><span>a</span></label>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Angles</h3>
+                        <div class='inputStyle2'>
+                            <input value='' type="text" id='triangleFormA'
+                                onkeydown="setTimeout(()=>{triangleCalc(3); return false}, 20)"><label
+                                for="triangleFormA"><i class="ri-alert-fill"></i><span>A</span></label>
+                        </div>
+                        <div class='inputStyle2'>
+                            <input value='' type="text" id='triangleFormB'
+                                onkeydown="setTimeout(()=>{triangleCalc(4); return false}, 20)"><label
+                                for="triangleFormB"><i class="ri-alert-fill"></i><span>B</span></label>
+                        </div>
+                        <div class='inputStyle2'>
+                            <input value='' type="text" id='triangleFormC'
+                                onkeydown="setTimeout(()=>{triangleCalc(5); return false}, 20)"><label
+                                for="triangleFormC"><i class="ri-alert-fill"></i><span>C</span></label>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Medians</h3>
+                        <div class='inputStyle2'>
+                            <input value='' type="text" id='triangleFormma'
+                                onkeydown="setTimeout(()=>{triangleCalc(6); return false}, 20)"><label
+                                for="triangleFormma"><i class="ri-alert-fill"></i><span>m<sub>a</sub></span></label>
+                        </div>
+                        <div class='inputStyle2'>
+                            <input value='' type="text" id='triangleFormmb'
+                                onkeydown="setTimeout(()=>{triangleCalc(7); return false}, 20)"><label
+                                for="triangleFormmb"><i class="ri-alert-fill"></i><span>m<sub>b</sub></span></label>
+                        </div>
+                        <div class='inputStyle2'>
+                            <input value='' type="text" id='triangleFormmc'
+                                onkeydown="setTimeout(()=>{triangleCalc(8); return false}, 20)"><label
+                                for="triangleFormmc"><i class="ri-alert-fill"></i><span>m<sub>c</sub></span></label>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Heights</h3>
+                        <div class='inputStyle2'>
+                            <input value='' type="text" id='triangleFormha'
+                                onkeydown="setTimeout(()=>{triangleCalc(9); return false}, 20)"><label
+                                for="triangleFormha"><i class="ri-alert-fill"></i><span>h<sub>a</sub></span></label>
+                        </div>
+                        <div class='inputStyle2'>
+                            <input value='' type="text" id='triangleFormhb'
+                                onkeydown="setTimeout(()=>{triangleCalc(10); return false}, 20)"><label
+                                for="triangleFormhb"><i class="ri-alert-fill"></i><span>h<sub>b</sub></span></label>
+                        </div>
+                        <div class='inputStyle2'>
+                            <input value='' type="text" id='triangleFormhc'
+                                onkeydown="setTimeout(()=>{triangleCalc(11); return false}, 20)"><label
+                                for="triangleFormhc"><i class="ri-alert-fill"></i><span>h<sub>c</sub></span></label>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Angle Bisectors</h3>
+                        <div class='inputStyle2'>
+                            <input value='' type="text" id='triangleFormia'
+                                onkeydown="setTimeout(()=>{triangleCalc(12); return false}, 20)"><label
+                                for="triangleFormia"><i class="ri-alert-fill"></i><span>i<sub>a</sub></span></label>
+                        </div>
+                        <div class='inputStyle2'>
+                            <input value='' type="text" id='triangleFormib'
+                                onkeydown="setTimeout(()=>{triangleCalc(13); return false}, 20)"><label
+                                for="triangleFormib"><i class="ri-alert-fill"></i><span>i<sub>b</sub></span></label>
+                        </div>
+                        <div class='inputStyle2'>
+                            <input value='' type="text" id='triangleFormic'
+                                onkeydown="setTimeout(()=>{triangleCalc(14); return false}, 20)"><label
+                                for="triangleFormic"><i class="ri-alert-fill"></i><span>i<sub>c</sub></span></label>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Exradii</h3>
+                        <div class='inputStyle2'>
+                            <input value='' type="text" id='triangleFormea'
+                                onkeydown="setTimeout(()=>{triangleCalc(15); return false}, 20)"><label
+                                for="triangleFormea"><i class="ri-alert-fill"></i><span>r<sub>a</sub></span></label>
+                        </div>
+                        <div class='inputStyle2'>
+                            <input value='' type="text" id='triangleFormeb'
+                                onkeydown="setTimeout(()=>{triangleCalc(16); return false}, 20)"><label
+                                for="triangleFormeb"><i class="ri-alert-fill"></i><span>r<sub>b</sub></span></label>
+                        </div>
+                        <div class='inputStyle2'>
+                            <input value='' type="text" id='triangleFormec'
+                                onkeydown="setTimeout(()=>{triangleCalc(17); return false}, 20)"><label
+                                for="triangleFormec"><i class="ri-alert-fill"></i><span>r<sub>c</sub></span></label>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Perimeter</h3>
+                        <div class='inputStyle2'>
+                            <input value='' type="text" id='triangleFormpm'
+                                onkeydown="setTimeout(()=>{triangleCalc(18); return false}, 20)"><label
+                                for="triangleFormpm"><i class="ri-alert-fill"></i><span>P</span></label>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>InRadius</h3>
+                        <div class='inputStyle2'>
+                            <input value='' type="text" id='triangleFormir'
+                                onkeydown="setTimeout(()=>{triangleCalc(19); return false}, 20)"><label
+                                for="triangleFormia"><i class="ri-alert-fill"></i><span>r</span></label>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>CircumRadius</h3>
+                        <div class='inputStyle2'>
+                            <input value='' type="text" id='triangleFormcr'
+                                onkeydown="setTimeout(()=>{triangleCalc(20); return false}, 20)"><label
+                                for="triangleFormia"><i class="ri-alert-fill"></i><span>R</span></label>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>Area</h3>
+                        <div class='inputStyle2'>
+                            <input value='' type="text" id='triangleFormarea'
+                                onkeydown="setTimeout(()=>{triangleCalc(21); return false}, 20)"><label
+                                for="triangleFormarea"><i class="ri-alert-fill"></i><span>Δ</span></label>
+                        </div>
+                    </div>
+                </div>
+                <input type="reset" onclick='triangleCalcReset();' value='Reset'>
+            </form>
+        </div>
+    </section>
+
+    <section id='quadraticSolver'>
+        <h1>Quadratic Equation Solver</h1>
+        <form id="quadForm" class='flexForm'>
+            <input id="quadinp1" class='quad' type="number" value='5' onkeydown="dynamicTyper(event,this.form)"><label
+                for="quadinp1">\(x^2~+~\)</label>
+            <input id="quadinp2" class='quad' type="number" value='25' onkeydown="dynamicTyper(event,this.form)"><label
+                for="quadinp2">\(x~+~\)</label>
+            <input id="quadinp3" class='quad' type="number" value='5' onkeydown="dynamicTyper(event,this.form)">
+            <!-- <div class = 'go'> -->
+            <input type="button" onclick="quadraticParse(this.form)" value='Go!'><input type="reset"
+                onclick='quadraticReset()' value='Reset'>
+            <!-- </div> -->
+        </form>
+        <script>
+            setTimeout(() => {
+                MathJax.typeset()
+            }, 1000)
+        </script>
+        <div id='quadOutOuterWrapper'>
+            <div id='quadOutInnerWrapper'>
+                <div id='quadraticOut'>
+                </div>
+            </div>
+            <div id='svgContainer'>
+                <svg class='GraphGeneral' id='quadraticGraph' height="400" viewBox="801 801 399 399" width="400"
+                    onmousedown='svgPanIni();' onmouseup="svgPanAbort();">
+                    <defs>
+                        <pattern height="10" id="pattern1" patternUnits="userSpaceOnUse" width="10">
+                            <path id='smallGridLine' d="M 10 0 L 0 0 0 10" fill="none" stroke="gray" stroke-width="0.5">
+                            </path>
+                        </pattern>
+                        <pattern height="100" id="pattern2" patternUnits="userSpaceOnUse" width="100">
+                            <rect id='gridUnit' fill="url(#pattern1)" height="100" width="100"></rect>
+                            <path id='largeGridLine' d="M 100 0 L 0 0 0 100" fill="none" stroke="gray"
+                                stroke-width="2px"></path>
+                        </pattern>
+                    </defs>
+                    <!-- <rect fill="white" height="2000" width="2000" y="0"></rect> -->
+                    <rect class='mainGrid' fill="url(#pattern2)" height="2000" width="2000" y="0"></rect>
+                    <g transform="translate(1000, 1000) scale(1, -1)">
+                        <line x1='-1000' y1='0' x2='1000' y2='0' stroke='#aaa' stroke-width='1.5px'></line>
+                        <line x1='0' y1='-1000' x2='0' y2='1000' stroke='#aaa' stroke-width='1.5px'></line>
+                        <path id='quadCurve' d="" fill='none' stroke='red' stroke-width='2.2' />
+                        <text class='graphLabel' transform='scale(1, -1)' x='0' y='15'></text>
+                        <text class='graphLabel' transform='scale(1, -1)' x='100' y='15'></text>
+                        <circle class='intersection' cx="0" cy="0" r="4" stroke-width="1" fill="none" />
+                        <circle class='intersection' cx="0" cy="0" r="4" stroke-width="1" fill="none" />
+                    </g>
+                </svg>
+                <div class='graphScale' id="quadScale">
+                    <svg viewBox="0 0 10 10" width='10px' height='10px'>
+                        <line stroke="white" x1="0" y1="5" x2="10" y2="5" stroke-width='2px'></line>
+                        <line stroke="white" x1="0" y1="1" x2="0" y2="9" stroke-width='2px'></line>
+                        <line stroke="white" x1="10" y1="1" x2="10" y2="9" stroke-width='2px'></line>
+                    </svg>
+                    <span id='quadScaleValue'></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id='genExpression'>
+        <h1>Single Digit Representation of a Number</h1>Given a number N and a digit D, can you find an expression that
+        contains only D and the operators +, -, *, / and <span class='previewWord'>concatenation<div class="preview">
+                <p><strong>Concatenation (+)</strong> is the operation of joining two numbers or strings end-to-end. For
+                    example, the concatenation of '4' and '9' is '49'.</p>
+                <svg width='20px' viewBox='0 0 100 50' style='position: absolute; bottom: 100%; left: 20px;'>
+                    <polygon points="50,0 0,50 100,50 " style="fill:white;stroke:none" />
+                </svg>
+            </div></span> and evaluates to N?
+        <form id="genExpForm">
+            <div class='inputStyle2'>
+                <input type="number" id='genExpFormN' VALUE="7"
+                    onkeydown="if(event.key === 'Enter'){event.preventDefault(); genExpression(this.form);}"><label
+                    for="genExpFormN">N</label>
+            </div>
+            <div class='inputStyle2'>
+                <input type="number" maxlength="1" id='genExpFormD' VALUE="4"
+                    onkeydown="if(event.key === 'Enter'){event.preventDefault(); genExpression(this.form);}"><label
+                    for="genExpFormD">D</label>
+            </div>
+            <div class="buttonsWrapper">
+                <input type="button" onclick="genExpression(this.form)" value='Go!'>
+                <div class="gearWrapper">
+                    <i class="ri-settings-4-fill"></i>
+                </div>
+            </div>
+            <!-- <div class='optMenu'>
+
+                        <strong>Performable operations: </strong><br>
+                        <div style='margin: 10px 0 10px 10px'>
+                            <input type="checkbox" id='add' onchange="genExpressionUpdate(this.form)"><label for="add">
+                                addition</label><br>
+                            <input type="checkbox" id='sub' onchange="genExpressionUpdate(this.form)"><label for="sub">
+                                subtraction</label><br>
+                            <input type="checkbox" id='mul' onchange="genExpressionUpdate(this.form)"><label for="mul">
+                                multiplication</label><br>
+                            <input type="checkbox" id='div' onchange="genExpressionUpdate(this.form)"><label for="div">
+                                division</label><br>
+                            <input type="checkbox" id='pow' onchange="genExpressionUpdate(this.form)"><label for="pow">
+                                exponentiation</label><br>
+                            <input type="checkbox" id='conc' onchange="genExpressionUpdate(this.form)"><label
+                                for="conc"> concatenation</label><br>
+                        </div>
+                        <label for="level"><strong>Maximum number of terms: </strong></label><input type="number"
+                            id='level' style='font-size: 0.5rem' class='lightTheme'
+                            onkeydown="setTimeout(()=>genExpressionUpdate(this.form), 20);if(event.key === 'Enter')closeMenu('genExpression')"><br>
+                        <label for="concatLimit"><strong>Concatenation limit: </strong></label><input type="number"
+                            id='concatLimit' style='font-size: 0.5rem' class='lightTheme'
+                            onkeydown="setTimeout(()=>genExpressionUpdate(this.form), 20);if(event.key === 'Enter')closeMenu('genExpression')"><br>
+                        <input type="checkbox" id='notAsterisk' onchange="genExpressionUpdate(this.form)"><label
+                            for="notAsterisk" style='display: inline-block; margin-top:10px; margin-left: 5px;'><strong>
+                                Use the symbol '&#215;' instead of '*'</strong></label><br>
+                        <input type="reset" onclick='genExpressionReset()' value='Reset' style='margin: 10px 0 0 0;'>
+                    </div> -->
+
+        </form>
+        <div id='genExpressionOut' class='sectionOut'></div>
+    </section>
+
+    <section id='CRT'>
+        <h1>Chinese Remainder Theorem</h1>In number theory, the Chinese remainder theorem states that if one knows the
+        remainders of the Euclidean division of an integer n by several integers, then one can determine uniquely the
+        remainder of the division
+        of n by the product of these integers, under the condition that the divisors are pairwise co-prime. You can read
+        up on its proof <a href="https://www.remnote.com/a/chinese-remainder-theorem/6224fa620bb73900166158fe"
+            target="_blank">here</a>.<br>
+        <form id="CRTform1">
+            <label for="CRTnoCongruences" style='width: auto; white-space: nowrap;'>Number of congruences</label> <input
+                onkeydown="setTimeout(()=>crt(this.form), 20)" type="number" id="CRTnoCongruences" VALUE="2">
+        </form>
+        <form id='CRTform2' class='mathInput'>
+        </form>
+        <div id='CRTOut' class='sectionOut'>
+        </div>
+    </section>
+
+    <section id='primeFactorize'>
+        <h1>Prime Factorizer</h1>
+        <form id="primeFactorizeForm" class="flexForm">
+            <input type="number" id="primeFactorizeInp1" VALUE="100"
+                onkeydown="if(event.key === 'Enter'){event.preventDefault(); primeFactorizeUser(this.form);}">
+            <span class='go'><input type="button" onclick="primeFactorizeUser(this.form)" value='Go!'></span>
+        </form>
+        <div class='sectionOut' id='primeFactorizeOut'>
+        </div>
+    </section>
+
+    <!-- <section id='primeNumberCalculator'>
+        <h1>
+            Prime Number Calculator
+        </h1><span>
+            Computation time increases exponentially with greater inputs.</span>
+        <form id="primeCalcForm">
+            <input type="number" id="primeCalcFormInp1" VALUE="100"
+                onkeydown="if(event.key === 'Enter'){event.preventDefault(); calcPrimes(this.form);}">
+            <span class='go'><input type="button" onclick="calcPrimes(this.form)" value='Go!'>
+                <div class='optMenuWrapper' style="height: 32px; width: 32px;">
+                    <svg class='gear' width='32px' viewBox="0 0 36 36" onclick='toggleMenu("primeNumberCalculator")'>
+                        <path
+                            d="m 23.94,18.78 c .03,-0.25 .05,-0.51 .05,-0.78 0,-0.27 -0.02,-0.52 -0.05,-0.78 l 1.68,-1.32 c .15,-0.12 .19,-0.33 .09,-0.51 l -1.6,-2.76 c -0.09,-0.17 -0.31,-0.24 -0.48,-0.17 l -1.99,.8 c -0.41,-0.32 -0.86,-0.58 -1.35,-0.78 l -0.30,-2.12 c -0.02,-0.19 -0.19,-0.33 -0.39,-0.33 l -3.2,0 c -0.2,0 -0.36,.14 -0.39,.33 l -0.30,2.12 c -0.48,.2 -0.93,.47 -1.35,.78 l -1.99,-0.8 c -0.18,-0.07 -0.39,0 -0.48,.17 l -1.6,2.76 c -0.10,.17 -0.05,.39 .09,.51 l 1.68,1.32 c -0.03,.25 -0.05,.52 -0.05,.78 0,.26 .02,.52 .05,.78 l -1.68,1.32 c -0.15,.12 -0.19,.33 -0.09,.51 l 1.6,2.76 c .09,.17 .31,.24 .48,.17 l 1.99,-0.8 c .41,.32 .86,.58 1.35,.78 l .30,2.12 c .02,.19 .19,.33 .39,.33 l 3.2,0 c .2,0 .36,-0.14 .39,-0.33 l .30,-2.12 c .48,-0.2 .93,-0.47 1.35,-0.78 l 1.99,.8 c .18,.07 .39,0 .48,-0.17 l 1.6,-2.76 c .09,-0.17 .05,-0.39 -0.09,-0.51 l -1.68,-1.32 0,0 z m -5.94,2.01 c -1.54,0 -2.8,-1.25 -2.8,-2.8 0,-1.54 1.25,-2.8 2.8,-2.8 1.54,0 2.8,1.25 2.8,2.8 0,1.54 -1.25,2.8 -2.8,2.8 l 0,0 z"
+                            fill="#000" id="ytp-id-18"></path>
+                    </svg>
+                    <div class='optMenu'>
+                        <input type="checkbox" id='graphIt' onchange="primeNumberCalculatorUpdate(this.form)"><label
+                            for="graphIt">
+                            Graph π(x)</label><br>
+                        <input type="reset" onclick='primeReset();' value='Reset' style='margin: 10px 0 0 0;'>
+                    </div>
+                </div>
+            </span>
+        </form>
+        <div class='graphContainer'>
+            <canvas id="primeNumberGraph"></canvas>
+        </div>
+        <div id='primeCalcOutput' class='sectionOut'>
+        </div>
+    </section> -->
+
+    <section id='goldbachConjecture'>
+        <h1>GoldBach Conjecture</h1>Goldbach's conjecture is one of the oldest and best-known unsolved problems in
+        number theory and all of mathematics. It states that every even whole number greater than 2 is the sum of two
+        prime numbers. The conjecture
+        has been shown to hold for all integers less than 4 × 10<sup>18</sup>, but remains unproven despite considerable
+        effort.
+        <form id="goldBachForm" class="flexForm">
+            <input type="number" id="goldBachInp" VALUE="100"
+                onkeydown="if(event.key === 'Enter'){event.preventDefault(); goldBach(this.form);}">
+            <div class="buttonsWrapper">
+                <input type="button" onclick="goldBach(this.form)" value='Go!'><input type="reset"
+                    onclick='goldBachReset();' value='Reset'>
+            </div>
+        </form>
+        <div id='goldBachOut' class='sectionOut'>
+        </div>
+    </section>
+
+    <section id='Kaprekar Constant'>
+        <h1>Kaprekar's Constant</h1>Type in any 3 or 4 digit number which isn't a monodigit (something that's not like
+        1111 or 222). <br>If the difference between the descending and ascending orders of the number results in a
+        monodigit, the number won't work
+        either.
+        <br>The difference between the descending and ascending orders of the number will eventually reach 6174 in case
+        of 4 digits or 495 in case of 3 digits, aka Kaprekar's Constant.
+        <form id="kaprekarForm" class="flexForm">
+            <input type="number" id="kaprekarInp" VALUE="1001"
+                onkeydown="if(event.key === 'Enter'){event.preventDefault(); kaprekar(this.form);}">
+            <div class="buttonsWrapper">
+                <input type="button" onclick="kaprekar(this.form)" value='Go!'><input type="reset"
+                    onclick='kaprekarReset()' value='Reset'>
+            </div>
+        </form>
+        <div id='kaprekarOut' class='sectionOut'></div>
+    </section>
+
+    <section id='collatzConjecture' >
+        <h1>Collatz Conjecture</h1>The Collatz conjecture is a conjecture in mathematics that concerns the following
+        sequence.
+        <br> Enter any positive integer n. Then, if the previous term is even, the next term is one half of the previous
+        term. If the previous term is odd, the next term is 3 times the previous term plus 1. The conjecture is that no
+        matter what value
+        of n, the sequence will always end at 1. Try it out!
+        <form id="collatzForm" class='flexForm'>
+            <input type="number" id="collatzInp" VALUE="15"
+                onkeydown="if(event.key === 'Enter'){event.preventDefault(); collatz(this.form);}">
+            <div class='buttonsWrapper'>
+                <input type="button" onclick="collatz(this.form)" value='Go!'><input type="reset"
+                    onclick='collatzReset() ' value='Reset'>
+            </div>
+        </form>
+        <div class='graphContainer'>
+            <canvas id="collatzGraph"></canvas>
+        </div>
+
+        <div id='collatzOut' class='sectionOut'>
+        </div>
+        <div id='collLegend'>
+            '<span class='multiply' style='font-size: 1rem'>&rarr;</span>' signifies the operation ((n &#215; 3) + 1)
+            <br> '<span class='divide' style='font-size: 1rem'>&rarr;</span>' signifies the operation (n &#247; 2)
+        </div>
+    </section>
+    <footer>
+        <div class="footerLogoAndText">
+            <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 2000"
+                height='90px' width='90px' style="flex-shrink: 0;">
+                <use xlink:href="#logoSvg" />
+            </svg>
+            <div class="footerLogoText">
+                <div class='logoText'><span class='logoTextBig'>T</span> H E <span class='logoTextBig'>W</span> A R P I
+                    N G <span style="position:relative; margin: 0;padding: 0;"><span
+                            class='logoTextTesseract logoTextTesseractGradient'><span class='logoTextBig'>T</span> E S S
+                            E R A C T
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="footerPromo">
+            Like our work? Follow us on
+            <a href="https://neocities.org/site/thewarpingtesseract" target='_blank'><img
+                    src="https://neocities.org/img/neocitieslogo.png" alt="">Neocities</a><br> <span>// Leave a comment
+                if you're feeling extremely generous.</span>
+        </div>
+        <div id='quoteWrapper'>
+            <div id='quote'>
+            </div>
+        </div>
+        <hr> <i>Concept by &nbsp<b>Vishnu</b> &nbsp;●&nbsp; Design, Programming and Implementation by &nbsp<b><a
+                    href='https://randomdude.freecluster.eu' target='_blank'>Vasudev</a></b></i><br> For any feedback /
+        suggestions, please drop us a mail <a href='mailto:TheWarpingTesseract@protonmail.com'>here</a>
+        </div>
+        <nav id='contextMenu'>
+            <ul class='contextMenuItems'>
+                <li class='contextMenuItem' onclick='copyExp()'>
+                    Copy as text
+                </li>
+            </ul>
+        </nav>
+        <script src="perlinFlowField.js"></script>
+        <script src='general.js'></script>
+        <script src="data.js"></script>
+        <script src="script1.js"></script>
+        <script src="quadratic.js"></script>
+        <script src='genExpression.js'></script>
+        <script src='heron.js'></script>
+        <script src='crt.js'></script>
+        <script src='primeFactorize.js'></script>
+        <script>
+        </script>
+</body>
+
+</html>

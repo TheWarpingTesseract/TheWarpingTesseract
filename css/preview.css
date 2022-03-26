@@ -1,0 +1,46 @@
+.previewWord {
+    position: relative;
+    text-decoration: underline;
+}
+
+.previewWord:hover .preview {
+    display: block;
+    opacity: 1;
+    transition: 0.2s;
+}
+
+.previewWord .preview {
+    color: #000;
+    font-weight: 400;
+    background-color: #fff;
+    margin: 0.5rem auto;
+    width: 320px;
+    box-shadow: 0 30px 90px -20px rgba(0, 0, 0, 0.3), 0 0 1px 1px rgba(0, 0, 0, 0.05);
+    font-family: sans-serif;
+    position: absolute;
+    top: 100%;
+    left: -10px;
+    z-index: 200;
+    display: none;
+    transition: opacity 0.2s;
+    opacity: 0;
+    border-radius: 6px;
+}
+
+.preview div {
+    width: 320px;
+    height: 40px;
+    transition: 0.2s;
+}
+
+.preview p {
+    line-height: 1.5;
+    font-size: 14px;
+    margin: 0;
+    padding: 8px 15px;
+    transition: 0.2s;
+}
+
+.preview{
+    transition: 0.2s;
+}

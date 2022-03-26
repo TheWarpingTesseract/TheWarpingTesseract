@@ -1,0 +1,202 @@
+.big {
+    font-size: 5vw;
+    color: #000;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    font-weight: 700;
+    z-index: 10;
+    position: relative;
+    display: inline-block;
+    backdrop-filter: blur(25px);
+    border-radius: 20px;
+}
+
+.big2 {
+    backdrop-filter: blur(0px);
+    transition: 0.4s ease-in;
+}
+
+.doubleDown {
+    z-index: 12;
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    opacity: 0;
+}
+
+.doubleDown2 {
+    bottom: 10%;
+    opacity: 1;
+    transition: 1s;
+}
+
+.landingLights {
+    z-index: 9;
+    position: relative;
+}
+
+#landingLightsWrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.landing {
+    background-color: black;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#landingTitleWrapper {
+    position: relative;
+    width: 100%;
+    color: #4651ca;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 999;
+}
+
+.landing canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.landingCanvasContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.landingCanvasOverlay {
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0) 0%, rgb(7, 0, 31) 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(0px);
+}
+
+.perlinFallback {
+    opacity: 100%;
+    animation: fadeIn 1s ease-out both;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 100%;
+    }
+}
+
+
+/* ////////////// */
+
+.logoText {
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+    white-space: nowrap;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+.logoTextTesseract {
+    position: relative;
+    font-weight: 500;
+}
+
+.landing .logoText,
+.landing .logoTextTesseract {
+    color: black;
+}
+
+.logoTextTesseractTransparent {
+    opacity: 0;
+}
+
+.logoTextWhite {
+    color: white !important;
+    transition: 0.2s color ease-in;
+}
+
+.logoTextTesseractGradient {
+    background: linear-gradient(45deg, #bb17de, #2b64fe);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    opacity: 100%;
+    transition: 0.2s opacity ease-in;
+}
+
+.logoTextBig {
+    font-size: 125%;
+}
+
+.logoTextTesseractDouble {
+    position: absolute;
+    font-weight: 500;
+    top: 0;
+    left: 0;
+    height: 100%;
+    line-height: 128%;
+    color: #000;
+    z-index: -1;
+}
+
+
+/* //////////////// */
+
+#landingLogo {
+    width: 300px;
+    position: relative;
+    z-index: inherit;
+}
+
+#landingLogo svg g {
+    fill: rgb(2, 0, 14);
+}
+
+.landingLogoVisible {
+    fill: aliceblue !important;
+    transition: 0.4s;
+}
+
+.lightsAndLogoWrapper {
+    position: relative;
+    width: 100%;
+}

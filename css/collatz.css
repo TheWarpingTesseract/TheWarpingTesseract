@@ -1,0 +1,22 @@
+.multiply {
+    color: #ff0000;
+    font-size: 1.4rem;
+    display: inline-block;
+    transform: translate(0, 9px);
+}
+
+.divide {
+    color: #00b7ff;
+    font-size: 1.4rem;
+    display: inline-block;
+    transform: translate(0, 9px);
+}
+
+#collLegend {
+    font-size: 0.4rem;
+    display: none;
+    color: #888;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    line-height: 1em;
+}

@@ -1,0 +1,954 @@
+const mathematicians = [
+    "Riemann",
+    "Ramanujan",
+    "Euler",
+    "Carl Gauss",
+    "Jacob Bernoulli",
+    "Mathologer",
+    "Niccolò Tartaglia",
+    "Terence Tao",
+    "Blaise Pascal",
+    "Henri Poincaré",
+    "Édouard Lucas",
+    "Pierre de Fermat",
+    "Diophantus",
+    "Grigori Perelman",
+    "René Descartes",
+    "Joseph Fourier",
+    "G. H. Hardy",
+    "Alan Turing",
+];
+const quotes = [
+    [
+        "The most incomprehensible thing about the world is that it is at all comprehensible.",
+        "Albert Einstein",
+    ],
+    [
+        "We cannot solve our problems with the same thinking we used when we created them.",
+        "Albert Einstein",
+    ],
+    [
+        "He who cannot pause to wonder and stand rapt in awe is as good as dead; his eyes are closed.",
+        "Albert Einstein",
+    ],
+    [
+        "Life is good for only two things - discovering mathematics and teaching mathematics.",
+        "Siméon-Denis Poisson",
+    ],
+    [
+        "Young man, in mathematics you don't understand things. You just get used to them.",
+        "John von Neumann",
+    ],
+    [
+        "A mathematician may say anything he pleases but a physicist must be at least partially sane.",
+        "Josiah Willard Gibbs",
+    ],
+    [
+        "As far as the laws of mathematics refer to reality, they are not certain, and as far as they are certain, they do not refer to reality.",
+        "Albert Einstein",
+    ],
+    ["‘Obvious’ is the most dangerous word in mathematics.", "Eric Temple Bell"],
+    [
+        "Somehow it’s okay for people to chuckle about not being good at math. Yet, if I said “I never learned to read,” they’d say I was an illiterate dolt.",
+        "Neil deGrasse Tyson",
+    ],
+];
+const textFaces = [
+    "&#xaf;&#x5c;&#x5f;&#x28;&#x30c4;&#x29;&#x5f;&#x2f;&#xaf;",
+    "&#x28;&#x2580;&#x33f;&#x139;&#x32f;&#x2580;&#x33f;&#x20;&#x33f;&#x29;",
+    "&#x28;&#x7e;&#x2d8;&#x25be;&#x2d8;&#x29;&#x7e;",
+    "&#xf3c;&#x298;&#x31a;&#x644;&#x35c;&#x298;&#x31a;&#xf3d;",
+    "&#x1aa;&#x28;&#x2d8;&#x2323;&#x2d8;&#x29;&#x283;",
+    "&#x28;&#x5e;&#x32e;&#x5e;&#x29;",
+    "&#x30fd;&#x28;&#x25d5;&#x30ee;&#x25d5;&#x29;&#xff89;",
+    "&#x30fe;&#x28;&#x2310;&#x25a0;&#x5f;&#x25a0;&#x29;&#x30ce;&#x266a;",
+    "&#x28;&#x2609;&#x2323;&#x2609;&#x29;",
+    "&#x28;&#x360;&#x2256;&#x20;&#x35c;&#x296;&#x360;&#x2256;&#x29;",
+    "&#xff08;&#x3063;&#xff3e;&#x25bf;&#xff3e;&#xff09;",
+];
+const randomNum2 = Math.floor(Math.random() * quotes.length);
+document.querySelector(
+    "#quote"
+).innerHTML = `${quotes[randomNum2][0]}<div id='quoteBy'>${quotes[randomNum2][1]}</div>`;
+
+const numInputs = document.querySelectorAll("input[type=number");
+
+for (i = 0; i < numInputs.length; i++) {
+    numInputs[i].addEventListener("keydown", inpHandler);
+}
+const doNotBlock = [
+    "Tab",
+    "ArrowLeft",
+    "ArrowRight",
+    "Delete",
+    "Backspace",
+    "Control",
+    "Meta",
+    "v",
+    "a",
+    "c",
+];
+
+function inpHandler(e) {
+    if (
+        [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "0",
+            "-",
+            ".",
+            ...doNotBlock,
+        ].indexOf(e.key) < 0
+    ) {
+        e.preventDefault();
+        // console.log('block')
+    }
+}
+
+const input = document.querySelector("#genExpFormD");
+input.addEventListener("keydown", function (e) {
+    if (
+        (input.value.length >= 1 || ["0", "-", "."].indexOf(e.key) > -1) &&
+        doNotBlock.indexOf(e.key) < 0
+    ) {
+        e.preventDefault();
+    }
+});
+
+//const textFaces = ['¯\\_(ツ)_/¯', '(▀̿Ĺ̯▀̿ ̿)', '(~˘▾˘)~', '༼ʘ̚ل͜ʘ̚༽', 'ƪ(˘⌣˘)ʃ', '(^̮^)', 'ヽ(◕ヮ◕)ﾉ', 'ヾ(⌐■_■)ノ♪', '(⊙.⊙(☉⌣☉)⊙.⊙)', '(͠≖ ͜ʖ͠≖)', '（っ＾▿＾）'];
+
+ASCIIloading = {
+    loadingIntervalNo: 0,
+    delay: 100,
+    currentSpinner: 0,
+    el: "",
+    counter: 0,
+    spinners: [
+        ["—", "\\", " | ", "/"],
+        ".oO@*",
+        "▖▘▝▗",
+        "__\\|/____/|\\__",
+        "-≻›⟩|⟨‹≺-≺‹⟨|⟩›≻",
+        "-≻›⟩›≻-",
+        "◟◜◝◞",
+        "◌○⊙●⊙○",
+        "'°º¤ø,¸¸,ø¤º°'",
+        "−=≡",
+        "█▓▒░▒▓",
+        "▏▎▍▋▊▉▉▊▋▍▎▏",
+        "_▂▃▅▆▇█▇▆▅▃▂_",
+        "←↖↑↗→↘↓↙",
+        "|X——X",
+        "◐◓◑◒",
+        "⠀⡀⠄⠂⠁⠈⠐⠠⢀⣀⢄⢂⢁⢈⢐⢠⣠⢤⢢⢡⢨⢰⣰⢴⢲⢱⢸⣸⢼⢺⢹⣹⢽⢻⣻⢿⣿⣶⣤⣀",
+        "┤┘┴├┌┬┐", [
+            "(o.o)",
+            "(o.o)",
+            "(o.o)",
+            "(o.o)",
+            "(o.o)",
+            "(o.o)",
+            "(o.o)",
+            "(o.o)",
+            "(o.o)",
+            "(o.o)",
+            "(-.-)",
+            "(o.o)",
+            "(-.-)",
+            "(o.o)",
+            "(o.o)",
+        ],
+        [
+            "(~˘▾˘)~",
+            "(~˘▾˘)~",
+            "(~˘▾˘)~",
+            "(~˘▾˘)~",
+            "(~˘▾˘)~",
+            "(~˘▾˘)~",
+            "~(˘▾˘~)",
+            "~(˘▾˘~)",
+            "~(˘▾˘~)",
+            "~(˘▾˘~)",
+            "~(˘▾˘~)",
+            "~(˘▾˘~)",
+        ],
+    ],
+    playLoadingAnim(selector) {
+        this.el = document.querySelector(selector);
+        this.currentSpinner = Math.floor(Math.random() * this.spinners.length);
+        this.counter = 0;
+        this.loadingIntervalNo = setInterval(() => {
+            try {
+                this.el.innerText = this.spinners[this.currentSpinner][this.counter];
+            } catch {
+                console.log("something went wrong, removing interval function...");
+                clearInterval(this.loadingIntervalNo);
+            }
+            if (this.counter >= this.spinners[this.currentSpinner].length - 1) {
+                this.counter = 0;
+            } else {
+                this.counter++;
+            }
+        }, this.delay);
+    },
+    stopLoadingAnim() {
+        clearInterval(this.loadingIntervalNo);
+    },
+};
+
+function toast(msg1, msg2, overflow) {
+    let toast = document.createElement("div");
+    toast.setAttribute("class", "toastAlert");
+    toast.innerHTML = `<h2>${msg1}</h2><div class = 'toastExp ${overflow ? "" : "toastNoOverflow"
+        }'>${msg2}</div>`;
+    document.body.appendChild(toast);
+    setTimeout(function () {
+        document.body.removeChild(toast);
+    }, 4000);
+}
+
+function copyAnything(str) {
+    let dummy = document.createElement("input");
+    document.body.appendChild(dummy);
+    dummy.setAttribute("id", "dummy_id");
+    document.getElementById("dummy_id").value = str;
+    dummy.select();
+    navigator.clipboard.writeText(dummy.value);
+    document.body.removeChild(dummy);
+    toast("Copied!", str);
+}
+
+///////////////////////////////////////////////////////////////////////
+//init functions of all option menus
+
+function genExpressionInit() {
+    document.querySelector("#level").value = GEuserConfig.min;
+    console.log(GEuserConfig.min);
+    document.querySelector("#concatLimit").value = GEuserConfig.concatLimit;
+    document.querySelector("#add").checked = GEuserConfig.add;
+    document.querySelector("#sub").checked = GEuserConfig.sub;
+    document.querySelector("#mul").checked = GEuserConfig.mul;
+    document.querySelector("#div").checked = GEuserConfig.div;
+    document.querySelector("#pow").checked = GEuserConfig.pow;
+    document.querySelector("#conc").checked = GEuserConfig.conc;
+    document.querySelector("#notAsterisk").checked = GEuserConfig.notAsterisk;
+}
+
+function primeNUmberCalculatorInit() {
+    document.querySelector("#graphIt").checked = PUserConfig.graphIt;
+}
+///////////////////////////////////////////////////////////////////////
+//the option menu code
+
+const menus = {
+    genExpression: {
+        wrapper: "#genExpression .optMenuWrapper",
+        optMenuEl: "#genExpression .optMenu",
+        cogWheel: "#genExpression .gear",
+        init: genExpressionInit,
+        width: "500px",
+        height: "370px",
+        menuClosed: true,
+        mouseOverMenu: false,
+    },
+    primeNumberCalculator: {
+        wrapper: "#primeNumberCalculator .optMenuWrapper",
+        optMenuEl: "#primeNumberCalculator .optMenu",
+        cogWheel: "#primeNumberCalculator .gear",
+        init: primeNUmberCalculatorInit,
+        width: "150px",
+        height: "110px",
+        menuClosed: true,
+        mouseOverMenu: false,
+    },
+};
+
+//add event listeners for mouseover and mouse leave
+for (let menu in menus) {
+    document
+        .querySelector(menus[menu].optMenuEl)
+        .addEventListener("mouseleave", () => {
+            menus[menu].mouseOverMenu = false;
+            console.log(menu, menus[menu].mouseOverMenu);
+        });
+    document
+        .querySelector(menus[menu].optMenuEl)
+        .addEventListener("mouseover", () => {
+            menus[menu].mouseOverMenu = true;
+            console.log(menu, menus[menu].mouseOverMenu);
+        });
+}
+
+//called whenever the user clicks on a gear
+function toggleMenu(menuName) {
+    if (menus[menuName].menuClosed) {
+        setTimeout(() => {
+            menus[menuName].menuClosed = false;
+            document.querySelector(menus[menuName].optMenuEl).style.display = "block";
+        }, 200);
+        document.querySelector(menus[menuName].cogWheel).classList.add("gearRot");
+        document.querySelector(menus[menuName].wrapper).style.height =
+            menus[menuName].height;
+        document.querySelector(menus[menuName].wrapper).style.width =
+            menus[menuName].width;
+        document.querySelector(menus[menuName].wrapper).style.zIndex = 500;
+        for (let menu in menus) {
+            if (menu !== menuName) {
+                document.querySelector(menus[menu].wrapper).style.zIndex = 499;
+            }
+        }
+        menus[menuName].init();
+    }
+}
+
+//called whenever the user clicks on the body
+function considerClosingMenu() {
+    for (let menu in menus) {
+        if (!menus[menu].mouseOverMenu && !menus[menu].menuClosed) {
+            console.log("t");
+            closeMenu(menu);
+        }
+    }
+}
+
+//closes the menu
+function closeMenu(menuName) {
+    // console.log(menus[menuName])
+    document.querySelector(menus[menuName].cogWheel).classList.remove("gearRot");
+    document.querySelector(menus[menuName].wrapper).style.height = "32px";
+    document.querySelector(menus[menuName].wrapper).style.width = "32px";
+    document.querySelector(menus[menuName].optMenuEl).style.display = "none";
+    setTimeout(() => {
+        menus[menuName].menuClosed = true;
+    }, 200);
+}
+
+///////////////////////////////////////////////////////////////////////
+
+// math stuff
+
+function gcd_f2(...arr) {
+    let gcd = Math.abs(arr[0]);
+    for (let i = 1; i < arr.length; i++) {
+        let x = Math.abs(arr[i]);
+        let y = gcd;
+        while (y) {
+            let t = y;
+            y = x % y;
+            x = t;
+        }
+        gcd = x;
+    }
+    return gcd;
+}
+
+function gcd_f3(a, b, arr) {
+    if (b === 0) {
+        arr[0] = 1;
+        arr[1] = 0;
+        return a;
+    }
+    const g = gcd_f3(b, a % b, arr);
+    const tmpy = arr[0] - Math.floor(a / b) * arr[1];
+    arr[0] = arr[1];
+    arr[1] = tmpy;
+    return g;
+}
+
+class frac {
+    // data structure
+
+    // let x = new frac([
+    //      numerator here
+    //     [[the number or constant, the power to which it is raised],[the number or constant, the power to which it is raised],...], // numerator term1
+    //     [[the number or constant, the power to which it is raised],[the number or constant, the power to which it is raised],...], // numerator term2
+    //     .
+    //     .
+    //     .
+    // ], [
+    //      denominator here
+    //     [[the number or constant, the power to which it is raised],[the number or constant, the power to which it is raised],...], // denominator term1
+    //     [[the number or constant, the power to which it is raised],[the number or constant, the power to which it is raised],...], // denominator term2
+    //     .
+    //     .
+    //     .
+    // ]);
+
+    // instead of passing two arrays, you can also pass two numbers like
+    // new frac(numerator, denominator)
+    // to construct a simple fraction.
+
+    constructor(arr1, arr2, renderTwice = false) {
+        this.simple = false;
+        //judge whether the fraction is simple
+        if (typeof arr1 == "number" && typeof arr2 == "number") {
+            this.simple = true;
+            const gcd = gcd_f2(arr1, arr2);
+            arr1 = [
+                [
+                    [arr1 / gcd, 1]
+                ]
+            ];
+            arr2 = [
+                [
+                    [arr2 / gcd, 1]
+                ]
+            ];
+        }
+        const ndArray = [arr1, arr2];
+
+        this.assignDefVal = function () {
+            for (let nd of ndArray) {
+                for (let term of nd) {
+                    for (let factor of term) {
+                        if (!factor[1]) factor[1] = 1;
+                    }
+                }
+            }
+        };
+        if (!this.simple) this.assignDefVal();
+
+        this.firstElIn2dArr = function (arr) {
+            const tmp = [];
+            for (let i of arr) {
+                tmp.push(i[0]);
+            }
+            return tmp;
+        };
+
+        this.secondElIn2dArr = function (arr) {
+            const tmp = [];
+            for (let i of arr) {
+                tmp.push(i[1]);
+            }
+            return tmp;
+        };
+
+        this.hasIntegerFactors = function (arr) {
+            let intIndex = NaN;
+            for (let factor in arr) {
+                if (Number.isInteger(arr[factor][0])) {
+                    intIndex = factor;
+                    break;
+                }
+            }
+            // console.log(intIndex, arr)
+            return intIndex;
+        };
+
+        this.add = function (a, b) {
+            if (typeof a == "number" && typeof b == "number") {
+                return a + b;
+            }
+            if (typeof a == "object" && typeof b == "object") {
+                console.log('both are object');
+                console.log(a, b)
+                const lcm = this.lcm(a.d, b.d, a.simple && b.simple)
+                return new frac(6, 7)
+            }
+            if (typeof a == "number" && typeof b == "object") {
+                console.log('a is a number');
+                return new frac(7, 8)
+            }
+            if (typeof a == "object" && typeof b == "number") {
+                console.log('b is a number');
+                return new frac(8, 9)
+            }
+        };
+
+        this.lcm = function(a, b, simple = false){
+            console.log('%c--------------------------------------------', 'color:orange')
+            console.log(a, b);
+            if(simple){
+                
+            }
+        }
+
+        this.multiply = function (a, b) {
+            if (typeof a == "number" && typeof b == "number") {
+                return a * b;
+            }
+        };
+
+        this.greater = function (a, b) {
+            // console.log('greater, ', a, b)
+            if (typeof a == "number" && typeof b == "number") {
+                return a > b;
+            }
+        };
+
+        this.pow = function (a, b) {
+            //console.log(a, b)
+            if (typeof a == "number" && typeof b == "number") {
+                return Math.pow(a, b);
+            }
+        };
+
+        //returns the powers and indices of factors with integer bases
+        this.intFactors = function (
+            term,
+            integerFactorsIndices,
+            integerFactorPowers
+        ) {
+            for (let factor in term) {
+                if (Number.isInteger(term[factor][0])) {
+                    if (!(indexOfObj(integerFactorPowers, term[factor][1]) + 1))
+                        integerFactorPowers.push(term[factor][1]);
+                    integerFactorsIndices.push(factor);
+                }
+            }
+        };
+
+        //get rid of factors which evaluate to 1, and the term itself if one of the factors evaluate to 0
+        this.scrubUnities = function () {
+            for (let nd of ndArray) {
+                for (let term of nd) {
+                    // console.log('%c--------------------------------------------', 'color:red')
+                    // console.log('nd: ', ndArray.indexOf(nd));
+                    // console.log('term: ', nd.indexOf(term), cloneObj(term));
+
+                    const toScrub = [];
+                    for (let factor = 0; factor < term.length; factor++) {
+                        if (term[factor][0] == 1 || term[factor][1] == 0) {
+                            toScrub.push(factor);
+                        }
+                    }
+                    for (let index of toScrub) {
+                        term.splice(index, 1);
+                    }
+                    if (term.length == 0) {
+                        nd.splice(indexOfObj(nd, term));
+                        continue;
+                    }
+                }
+                if (nd.length == 0) {
+                    nd.push([
+                        [1, 1]
+                    ]);
+                }
+            }
+        };
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //simplify each term
+        this.consolidate = function () {
+            //scrub any redundant factors.
+            this.scrubUnities();
+            // console.log(cloneObj(arr1), cloneObj(arr2));
+            for (let nd of ndArray) {
+                loop1: for (let term of nd) {
+                    console.log('%c--------------------------------------------', 'color:red')
+                    console.log('nd: ', ndArray.indexOf(nd));
+                    console.log('term: ', nd.indexOf(term));
+
+                    //consolidate the integer portion into one factor
+                    for (let factor in term) {
+                        const result = this.pow(term[factor][0], term[factor][1]);
+                        // console.log('------------------------------------------')
+                        // console.log('result, ', result);
+                        // console.log('factor', factor)
+                        if (Number.isInteger(result)) {
+                            if (result == 0) {
+                                nd.splice(indexOfObj(nd, term));
+                                continue loop1;
+                            } else {
+                                term[factor][0] = result;
+                                term[factor][1] = 1;
+                            }
+                        }
+                    }
+
+                    //consolidate different integer factors with the same exponent into one factor.
+                    const integerFactorsIndices = [];
+                    const integerFactorPowers = [];
+                    this.intFactors(term, integerFactorsIndices, integerFactorPowers);
+                    let toAppend = [];
+                    for (let power of integerFactorPowers) {
+                        const toAppend2 = [1, power];
+                        for (let index of integerFactorsIndices) {
+                            if (indexOfObj(term[index], power) + 1) {
+                                toAppend2[0] *= term[index][0];
+                            }
+                        }
+                        toAppend.push(toAppend2);
+                    }
+                    // remove the old factors...
+                    for (let i = integerFactorsIndices.length - 1; i >= 0; i--)
+                        term.splice(integerFactorsIndices[i], 1);
+                    //and the add the new ones!
+                    if (integerFactorsIndices.length) term.push(...toAppend);
+
+                    
+
+                    //consolidate different factors(which do not have an integer for a base) with the same base into one factor.
+                    const repeatedBases = [];
+                    const checkedBases = [];
+                    const allRepeatedIndices = [];
+                    for (let factor in term) {
+                        if (checkedBases.indexOf(JSON.stringify(term[factor][0])) < 0) {
+                            const repeatedBase = [term[factor][0],
+                            [factor]
+                            ];
+                            for (let factor2 in term) {
+                                if (
+                                    factor != factor2 &&
+                                    JSON.stringify(term[factor][0]) ===
+                                    JSON.stringify(term[factor2][0])
+                                ) {
+                                    repeatedBase[1].push(factor2);
+                                }
+                            }
+                            if (repeatedBase[1].length > 1) {
+                                repeatedBases.push(repeatedBase);
+                                allRepeatedIndices.push(...repeatedBase[1]);
+                            }
+                            checkedBases.push(JSON.stringify(term[factor][0]));
+                        }
+                    }
+                    allRepeatedIndices.sort();
+                    // console.log('repeatedBases, \n', repeatedBases);
+                    // console.log('checked bases: \n', checkedBases);
+                    // console.log(allRepeatedIndices);
+                    toAppend = [];
+                    for (let repeatedBase of repeatedBases) {
+                        let power = 0;
+                        for (let i = 0; i < repeatedBase[1].length; i++) {
+                            power = this.add(power, term[repeatedBase[1][i]][1]);
+                        }
+                        toAppend.push([repeatedBase[0], power]);
+                    }
+                    for (let i = allRepeatedIndices.length - 1; i >= 0; i--) {
+                        term.splice(allRepeatedIndices[i], 1);
+                    }
+                    term.push(...toAppend);
+                }
+            }
+            //scrub any redundant factors.
+            this.scrubUnities();
+            console.log('consolidate done!')
+            console.log(cloneObj(arr1))
+            console.log(cloneObj(arr2))
+
+        };
+
+        //simplify the fraction by dividing the numerator and denominator by their gcd.
+        this.simplify = function () {
+            //compute gcd
+
+            //compute the gcd for non-integer terms.
+            let commonFactors = [];
+            for (let nd in ndArray) {
+                for (let termI in ndArray[nd]) {
+                    const term = ndArray[nd][termI];
+                    // console.log('------------------------------------------')
+                    if (parseInt(nd) === 0 && parseInt(termI) === 0)
+                        commonFactors = [...term];
+                    else {
+                        const tmp = this.firstElIn2dArr(term);
+                        const tmp2 = this.firstElIn2dArr(commonFactors);
+                        const filteredArray = cloneObj(
+                            commonFactors.filter(
+                                (x) => indexOfObj(tmp, x[0]) + 1 && !Number.isInteger(x[0])
+                            )
+                        );
+                        // console.log('term, \n', cloneObj(term));
+                        // console.log('common factors, \n', cloneObj(commonFactors));
+                        // console.log('filtered array, \n', cloneObj(filteredArray));
+                        for (let i of filteredArray) {
+                            i[1] = term[indexOfObj(tmp, i[0])][1];
+                            if (
+                                this.greater(i[1], commonFactors[indexOfObj(tmp2, i[0])][1])
+                            ) {
+                                i[1] = commonFactors[indexOfObj(tmp2, i[0])][1];
+                            }
+                        }
+                        commonFactors = filteredArray;
+                    }
+                }
+            }
+
+            //divide by the gcd
+            for (let commonFactor of commonFactors) {
+                for (let nd of ndArray) {
+                    for (let term of nd) {
+                        const tmp = this.firstElIn2dArr(term);
+                        term[indexOfObj(tmp, commonFactor[0])][1] = this.add(
+                            term[indexOfObj(tmp, commonFactor[0])][1],
+                            this.multiply(commonFactor[1], -1)
+                        );
+                        if (term[indexOfObj(tmp, commonFactor[0])][1] == 0) {
+                            term.splice(indexOfObj(tmp, commonFactor[0]), 1);
+                        }
+                    }
+                }
+            }
+
+            //compute gcd for factors whose bases are integers
+            //gather common powers
+            let commonPowers = [];
+            for (let nd in ndArray) {
+                for (let termI in ndArray[nd]) {
+                    const term = ndArray[nd][termI];
+                    // console.log('%c------------------------------------------', 'color: blue')
+                    // console.log('term, \n', cloneObj(term));
+                    const termIntFactors = [
+                        [],
+                        []
+                    ];
+                    this.intFactors(term, termIntFactors[0], termIntFactors[1]);
+                    // console.log('termIntFactors, ', termIntFactors);
+                    // console.log('commonPowers, ', commonPowers);
+                    if (parseInt(nd) === 0 && parseInt(termI) === 0) {
+                        commonPowers.push(...termIntFactors[1]);
+                    } else {
+                        commonPowers = commonPowers.filter(
+                            (x) => indexOfObj(termIntFactors[1], x) + 1
+                        );
+                    }
+                }
+            }
+
+            //compute gcd for the common powers
+            let intGcd = [];
+            // console.log('commonPowers, ', commonPowers)
+            for (let commonPower of commonPowers) {
+                const bases = [];
+                for (let nd of ndArray) {
+                    for (let term of nd) {
+                        const index = indexOfObj(this.secondElIn2dArr(term), commonPower);
+                        bases.push(term[index][0]);
+                    }
+                }
+                intGcd.push([gcd_f2(...bases), commonPower]);
+            }
+            // console.log('intGcd, ', intGcd)
+
+            //divide by the gcc
+            for (let gcd of intGcd) {
+                for (let nd of ndArray) {
+                    for (let term of nd) {
+                        const index = indexOfObj(this.secondElIn2dArr(term), gcd[1]);
+                        term[index][0] /= gcd[0];
+                    }
+                }
+            }
+            this.consolidate();
+        };
+
+        //serialize the frac object into latex
+        this.stringify = function (factor = undefined) {
+            if (factor) {
+                switch (typeof factor) {
+                    case "number":
+                        return factor;
+                        break;
+                    case "object":
+                        return `{${factor.stringify()}}`;
+                        break;
+                    case "string":
+                        return `\\${factor}`;
+                }
+                return;
+            }
+            let str = "\\frac";
+            for (let nd of ndArray) {
+                str += "{";
+                for (let term of nd) {
+                    for (let factor in term) {
+                        let base = this.stringify(term[factor][0]);
+                        if (typeof term[factor][0] == "object") base = `(${base})`;
+
+                        if (typeof term[factor][1] == "object" && term[factor][1].simple) {
+                            const power = [
+                                term[factor][1].n[0][0][0],
+                                term[factor][1].d[0][0][0],
+                            ];
+                            console.log(power);
+                            str += ` \\sqrt${power[1] == 2 ? "" : `[${power[1]}]`}{${base}${power[0] == 1 ? "" : `^${power[0]}`}}`;
+                        } else {
+                            const power = this.stringify(term[factor][1]);
+                            str += ` ${base}${power == 1 ? "" : `^${power}`} `;
+                            if (
+                                factor != term.length - 1 &&
+                                typeof base == "number" &&
+                                power == 1
+                            ) {
+                                str += "\\cdot";
+                            }
+                        }
+                    }
+                    str += " + ";
+                }
+                str = str.slice(0, -3);
+                str += "}";
+            }
+            return str;
+        };
+
+        //for testing
+        // if (renderTwice) {
+        //     let str = this.stringify();
+        //     document.querySelector("h1").innerHTML += "$$ " + str + "= $$";
+        //     console.log(str);
+        //     setTimeout(() => MathJax.typeset(), 100);
+        // }
+
+        if (!this.simple) {
+            this.consolidate();
+            this.simplify();
+        }
+
+        this.n = arr1;
+        this.d = arr2;
+    }
+}
+
+let st = performance.now();
+
+
+let a = new frac(
+    [
+        [
+            ["pi", 1],
+            [3, 2],
+            ["iota", new frac(1, 3)],
+            ["iota", new frac(2, 3)],
+            ["pi", 2],
+            [24, new frac(1, 2)],
+            [100, new frac(1, 9)],
+            [new frac(1, 2), new frac(2, 5)],
+        ],
+        [
+            [10, new frac(1, 9)],
+            [6, new frac(1, 2)],
+            [7, new frac(2, 3)],
+            [8, new frac(2, 3)],
+            ["pi"],
+        ],
+    ],
+    [
+        [
+            [3, 2],
+            ["pi", 4],
+            [23, new frac(1, 3)],
+            [30, new frac(1, 2)],
+            [8, new frac(1, 9)],
+        ],
+    ],
+    true
+);
+
+function testStringify(a) {
+    let str = a.stringify();
+    document.querySelector("h1").innerHTML += "$$ " + str + " $$";
+    console.log(str);
+    setTimeout(() => MathJax.typeset(), 100);
+}
+testStringify(a);
+
+console.log(performance.now() - st);
+
+// document.querySelector('#quadraticSolver').innerHTML = '`' + a.stringify() + '`';
+// MathJax.typeset();
+
+function indexOfObj(arr, obj) {
+    const srtObj = JSON.stringify(obj);
+    // console.log(obj)
+    for (let i = 0; i < arr.length; i++) {
+        if (JSON.stringify(arr[i]) === srtObj) {
+            // console.log(i);
+            return i;
+        }
+    }
+    return -1;
+}
+
+function cloneObj(arr) {
+    return JSON.parse(JSON.stringify(arr));
+}
+
+//find all prefect squares till a number n
+function perfsq(n) {
+    const l = [1];
+    let i = 0;
+    let x = 3;
+    while (l[l.length - 1] + x <= n) {
+        l.push(l[i] + x);
+        i++;
+        x = 2 * i + 3;
+    }
+    return l;
+}
+
+//reduces radicals to simplest terms
+function reduceSqrt(n) {
+    if (n < 0) {
+        return "x001";
+    }
+    if (Number.isInteger(Math.sqrt(n))) {
+        return "x002";
+    }
+    const l = [];
+    let perfsqs = perfsq(n / 2);
+    for (i in perfsqs) {
+        if (n % perfsqs[i] === 0) {
+            l.push(perfsqs[i]);
+        }
+    }
+    if (l.length === 0) {
+        //the radical is irreducible
+        return "x003";
+    }
+    let a = Math.sqrt(l[l.length - 1]);
+    let b = n / l[l.length - 1];
+    return [a, b];
+}
+
+function parseErrorsSqrt(a, b) {
+    //handles errors from the reduceSqrt function
+    if (a === "x002") {
+        // the number is a perfect square, safe to take its square root and return it
+        return Math.sqrt(b);
+    }
+    if (a === "x003") {
+        // the radical is irreducible. Return the number under the radical
+        return [1, b];
+    }
+    return a;
+}
+
+function isReduced(a) {
+    if (typeof a === "object") return "reduced";
+    return "";
+}
+
+if (typeof Storage !== "undefined") {
+    const a = localStorage.getItem("visited");
+    if (!a) {
+        localStorage.setItem("visited", "notified");
+        toast(
+            "Hard refresh required",
+            "Our website's been updated! We suggest you hard refresh.",
+            true
+        );
+    } else {
+        if (a == "notified") {
+            toast(
+                "Heya!",
+                "Our website just got a new face! How'd you like it?",
+                true
+            );
+        }
+        localStorage.setItem("visited", "ok");
+    }
+} else {
+    console.log("no webstorage support");
+}
