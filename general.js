@@ -1504,7 +1504,6 @@ class frac {
                                 for (let angle of allStdAnglesFrac) {
                                     console.log('----------------------------')
                                     console.log(angle.stringify())
-                                    // console.log( angle.reciprocal().stringify())
                                     const tmp = fracTwoMultiply(coeff, angle.reciprocal())
                                     tmp.factorize();
 
@@ -1593,12 +1592,12 @@ setTimeout(() => {
             [10],
             [new frac([
                 [
-                    [3],
+                    [1],
                     ['pi']
                 ]
             ], [
                 [
-                    [5 ]
+                    [24]
                 ]
             ], { func: 'cos' }), 2]
         ]
@@ -1607,28 +1606,6 @@ setTimeout(() => {
             [3, new frac(2, 3)]
         ]
     ], { flag: 'under root' })
-
-    // a.testRender();
-    // a = new frac([
-    //     [
-    //         [10],
-    //         [new frac([
-    //             [
-    //                 [3],
-    //                 ['pi']
-    //             ]
-    //         ], [
-    //             [
-    //                 [10]
-    //             ]
-    //         ], { func: 'cos' }), 2]
-    //     ]
-    // ], [
-    //     [
-    //         [1, 1]
-    //     ]
-    // ], { flag: 'under root' })
-    // fracTwoMultiply(cos1_10, new frac(8, 5)).testRender()
     a.testRender();
 }, 100);
 
