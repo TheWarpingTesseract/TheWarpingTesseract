@@ -1189,47 +1189,6 @@ class frac {
                 }
 
                 this.scrubUnities()
-
-
-
-                // this.testRender('consolidation done:')
-
-
-                // multiply factors in a term
-                // for (let ndI in ndArray) {
-                //     const nd = ndArray[ndI]
-                //     for (let termI in nd) {
-                //         const term = nd[termI];
-                //         if (term.length > 1) {
-                //             const newBases = [];
-                //             let needToSimplify = false;
-                //             for (let factor of term) {
-                //                 newBases.push(fracPow(factor[0], factor[1]));
-                //                 // console.log(factor)
-                //                 if (typeof factor[0] == 'object' &&
-                //                     !(factor[0].d.length == 1 &&
-                //                         factor[0].d[0][0][0] == 1)) needToSimplify = true;
-                //             }
-                //             if (needToSimplify) {
-                //                 for (let x in newBases) {
-                //                     console.log(x);
-                //                     const y = newBases[x]
-                //                     console.log(y);
-                //                     if (typeof (y) == 'object') {
-                //                         y.testRender(`factor ${x}`);
-                //                         console.log(y.stringify())
-                //                     }
-                //                 }
-                //                 const product = fracMultiply(...newBases);
-                //                 if (typeof product == 'object')
-                //                     product.testRender('product');
-                //                 console.log(cloneObj(product));
-                //                 term.splice(0, term.length);
-                //                 term.push([product, 1])
-                //             }
-                //         }
-                //     }
-                // } 
             };
 
             //factorize all terms
