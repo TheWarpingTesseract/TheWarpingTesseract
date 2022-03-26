@@ -1,11 +1,21 @@
-name: workflow test
-on: [push]
+name: Deploy to neocities
+
+# only run on changes to master
+on:
+  push:
+    branches: [master]
+
+concurrency: # prevent concurrent deploys doing strange things
+  group: deploy-to-neocities
+  cancel-in-progress: true
+
 jobs:
-  I-AM-A-JOB:
+  deploy:
     runs-on: ubuntu-latest
-    steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+    # When the dist_dir is ready, deploy it to neocities
+    - name: Deploy to neocities
+      uses: bcomnes/deploy-to-neocities@v1
+      with:
+        api_token: ${{ secrets.NEOCITIES_API_TOKEN }}
+        cleanup: false
+        dist_dir: public
