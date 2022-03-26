@@ -188,6 +188,8 @@ ASCIIloading = {
     },
 };
 
+//utility
+{
 //toast message
 function toast(msg1, msg2, overflow) {
     let toast = document.createElement("div");
@@ -224,118 +226,6 @@ function flipSwitch(arg, Sw1, Sw2) {
         Sw1.classList.remove('active');
     }
 }
-
-//opt menu
-{
-    ///////////////////////////////////////////////////////////////////////
-    //init functions of all option menus
-
-    // function genExpressionInit() {
-    //     document.querySelector("#level").value = GEuserConfig.min;
-    //     console.log(GEuserConfig.min);
-    //     document.querySelector("#concatLimit").value = GEuserConfig.concatLimit;
-    //     document.querySelector("#add").checked = GEuserConfig.add;
-    //     document.querySelector("#sub").checked = GEuserConfig.sub;
-    //     document.querySelector("#mul").checked = GEuserConfig.mul;
-    //     document.querySelector("#div").checked = GEuserConfig.div;
-    //     document.querySelector("#pow").checked = GEuserConfig.pow;
-    //     document.querySelector("#conc").checked = GEuserConfig.conc;
-    //     document.querySelector("#notAsterisk").checked = GEuserConfig.notAsterisk;
-    // }
-
-    // function primeNUmberCalculatorInit() {
-    //     document.querySelector("#graphIt").checked = PUserConfig.graphIt;
-    // }
-    ///////////////////////////////////////////////////////////////////////
-    //the option menu 
-
-    // const menus = {
-    //     genExpression: {
-    //         wrapper: "#genExpression .optMenuWrapper",
-    //         optMenuEl: "#genExpression .optMenu",
-    //         cogWheel: "#genExpression .gear",
-    //         init: genExpressionInit,
-    //         width: "500px",
-    //         height: "370px",
-    //         menuClosed: true,
-    //         mouseOverMenu: false,
-    //     },
-    //     primeNumberCalculator: {
-    //         wrapper: "#primeNumberCalculator .optMenuWrapper",
-    //         optMenuEl: "#primeNumberCalculator .optMenu",
-    //         cogWheel: "#primeNumberCalculator .gear",
-    //         init: primeNUmberCalculatorInit,
-    //         width: "150px",
-    //         height: "110px",
-    //         menuClosed: true,
-    //         mouseOverMenu: false,
-    //     },
-    // };
-
-    // //add event listeners for mouseover and mouse leave
-    // for (let menu in menus) {
-    //     document
-    //         .querySelector(menus[menu].optMenuEl)
-    //         .addEventListener("mouseleave", () => {
-    //             menus[menu].mouseOverMenu = false;
-    //             console.log(menu, menus[menu].mouseOverMenu);
-    //         });
-    //     document
-    //         .querySelector(menus[menu].optMenuEl)
-    //         .addEventListener("mouseover", () => {
-    //             menus[menu].mouseOverMenu = true;
-    //             console.log(menu, menus[menu].mouseOverMenu);
-    //         });
-    // }
-
-    // //called whenever the user clicks on a cogwheel
-    // function toggleMenu(menuName) {
-    //     if (menus[menuName].menuClosed) {
-    //         setTimeout(() => {
-    //             menus[menuName].menuClosed = false;
-    //             document.querySelector(menus[menuName].optMenuEl).style.display = "block";
-    //         }, 200);
-    //         document.querySelector(menus[menuName].cogWheel).classList.add("gearRot");
-    //         document.querySelector(menus[menuName].wrapper).style.height =
-    //             menus[menuName].height;
-    //         document.querySelector(menus[menuName].wrapper).style.width =
-    //             menus[menuName].width;
-    //         document.querySelector(menus[menuName].wrapper).style.zIndex = 500;
-    //         for (let menu in menus) {
-    //             if (menu !== menuName) {
-    //                 document.querySelector(menus[menu].wrapper).style.zIndex = 499;
-    //             }
-    //         }
-    //         menus[menuName].init();
-    //     }
-    // }
-
-    // //called whenever the user clicks on the body
-    // function considerClosingMenu() {
-    //     for (let menu in menus) {
-    //         if (!menus[menu].mouseOverMenu && !menus[menu].menuClosed) {
-    //             console.log("t");
-    //             closeMenu(menu);
-    //         }
-    //     }
-    // }
-
-    // //closes the menu
-    // function closeMenu(menuName) {
-    //     // console.log(menus[menuName])
-    //     document.querySelector(menus[menuName].cogWheel).classList.remove("gearRot");
-    //     document.querySelector(menus[menuName].wrapper).style.height = "32px";
-    //     document.querySelector(menus[menuName].wrapper).style.width = "32px";
-    //     document.querySelector(menus[menuName].optMenuEl).style.display = "none";
-    //     setTimeout(() => {
-    //         menus[menuName].menuClosed = true;
-    //     }, 200);
-    // }
-
-
-
-
-    ///////////////////////////////////////////////////////////////////////
 }
 
 // math stuff
