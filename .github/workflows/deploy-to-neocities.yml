@@ -20,3 +20,6 @@ jobs:
           api_token: ${{ secrets.NEOCITIES_API_TOKEN }}
           cleanup: false
           dist_dir: /
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
