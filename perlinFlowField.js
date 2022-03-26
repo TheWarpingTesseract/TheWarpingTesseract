@@ -27,8 +27,8 @@ class Particle {
     }
 
     show() {
-        stroke(107, 119, 255, 8);
-        strokeWeight(1);
+        stroke(107, 119, 255, 10);
+        strokeWeight(2);
         line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
         this.updatePrev();
     }
@@ -75,7 +75,7 @@ function setup() {
     perlin.parent('landingCanvasContainer');
     cols = floor(window.innerWidth / scl);
     rows = floor(window.innerHeight / scl);
-    let numParticles = 300;
+    let numParticles = 100;
 
     flowfield = new Array(cols * rows);
     for (let i = 0; i < numParticles; i++) {
@@ -143,7 +143,6 @@ let fps = [];
 let countFps = true;
 let usePerlinFallback = false;
 let looping = true;
-let perlinAnimComp = false;
 let timeElapsed = 0;
 let start = performance.now();
 let perlinRunTime = 30000;
@@ -166,6 +165,7 @@ function draw() {
             stroke(0, 50);
         }
         yoff += inc;
+
         zoff += 0.0003;
     }
 
@@ -177,9 +177,7 @@ function draw() {
     }
     if (performance.now() - start > perlinRunTime) {
         noLoop();
-        // document.removeEventListener('scroll', smth);
-        perlinAnimComp = true;
-        looping = false;
+        document.removeEventListener('scroll', smth);
     }
     if (countFps) {
         fps.push(Math.floor(frameRate()));
@@ -191,21 +189,21 @@ function draw() {
         }
         sum /= 10
         console.log(sum);
-        // if (sum < 30) {
-        //     console.log('got a weakling');
-        //     usePerlinFallback = true;
-        //     noLoop();
-        // }
+        if (sum < 20) {
+            console.log('got a weakling');
+            usePerlinFallback = true;
+            noLoop();
+        }
         fps = [];
         countFps = false;
     }
-    // console.log(frameRate())
+    console.log(frameRate());
 }
 
 
 function smth() {
     if (window.innerHeight > window.scrollY) {
-        if (!looping && !usePerlinFallback && !perlinAnimComp) {
+        if (!looping && !usePerlinFallback) {
             start = performance.now() - timeElapsed;
             looping = true;
             loop();
@@ -217,9 +215,6 @@ function smth() {
             document.querySelector('.doubleDown').style.display = 'none';
             looping = false;
             noLoop();
-        } else if (usePerlinFallback || perlinAnimComp) {
-            document.querySelector('.doubleDown').style.display = 'none';
-            document.removeEventListener('scroll', smth);
         }
     }
 }

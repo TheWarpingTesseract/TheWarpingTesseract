@@ -2,14 +2,14 @@
     color: #ff0000;
     font-size: 1.4rem;
     display: inline-block;
-    transform: translate(0, 9px);
+    transform: translate(0, 7px);
 }
 
 .divide {
     color: #00b7ff;
     font-size: 1.4rem;
     display: inline-block;
-    transform: translate(0, 9px);
+    transform: translate(0, 7px);
 }
 
 #collLegend {
