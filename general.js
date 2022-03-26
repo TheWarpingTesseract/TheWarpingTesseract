@@ -54,7 +54,7 @@ document.querySelector(
 
 
 
-//inp handlers
+//inp handlers 
 {
     const numInputs = document.querySelectorAll("input[type=number");
 
