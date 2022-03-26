@@ -197,7 +197,7 @@ function draw() {
         fps = [];
         countFps = false;
     }
-    console.log(frameRate());
+    // console.log(frameRate());
 }
 
 
