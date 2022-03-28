@@ -1,0 +1,28 @@
+// check if the angle is two^(some +ve integer) times a standard angle
+                                    if (tmp.n.length == 1 &&
+                                        tmp.d.length == 1 &&
+                                        tmp.n[0].length == 1 &&
+                                        tmp.d[0].length == 1) {
+                                        if (
+                                            tmp.d[0][0][0] == 1 &&
+                                            tmp.d[0][0][1] == 1 &&
+                                            tmp.n[0][0][0] == 2 &&
+                                            Number.isInteger(tmp.n[0][0][1])
+                                        ) {
+                                            // use double angle formula
+                                            // console.log("use double angle formula", angle.stringify(), tmp.n[0][0][1])
+                                            // console.log(standardAngles[angle.stringify()][0].value());
+                                            replaceArgWithResult(fracTwoAdd(1, fracTwoMultiply(fracPow(standardAngles[angle.stringify()][0], 2), -2)));
+                                            return;
+                                        }
+                                        else if (
+                                            tmp.n[0][0][0] == 1 &&
+                                            tmp.n[0][0][1] == 1 &&
+                                            tmp.d[0][0][0] == 2 &&
+                                            Number.isInteger(tmp.d[0][0][1])
+                                        ) {
+                                            //use half angle formula
+                                            console.log("use half angle formula", angle.stringify(), tmp.d[0][0][1])
+
+                                        }
+                                    }

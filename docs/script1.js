@@ -349,5 +349,3 @@ function kaprekarReset() {
     document.querySelector("#kaprekarOut").innerHTML = ""
 }
 
-
-console.log('test string')

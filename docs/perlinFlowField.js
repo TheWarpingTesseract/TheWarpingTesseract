@@ -190,12 +190,12 @@ function draw() {
             sum += fps[i]
         }
         sum /= 10
-        console.log(sum);
-        // if (sum < 30) {
-        //     console.log('got a weakling');
-        //     usePerlinFallback = true;
-        //     noLoop();
-        // }
+        // console.log(sum);
+        if (sum < 20) {
+            console.log('got a weakling');
+            usePerlinFallback = true;
+            noLoop();
+        }
         fps = [];
         countFps = false;
     }
@@ -213,10 +213,10 @@ function smth() {
     } else {
         if (looping && !usePerlinFallback) {
             timeElapsed = performance.now() - start;
-            console.log(timeElapsed);
+            // console.log(timeElapsed);
             document.querySelector('.doubleDown').style.display = 'none';
             looping = false;
-            noLoop();
+            try{noLoop()}catch{}
         } else if (usePerlinFallback || perlinAnimComp) {
             document.querySelector('.doubleDown').style.display = 'none';
             document.removeEventListener('scroll', smth);
