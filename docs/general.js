@@ -1688,31 +1688,31 @@ class frac {
 
 //experimental
 setTimeout(() => {
-    const st = performance.now();
-    const a = new frac([
-        [
-            [25]
-        ], [
-            [10],
-            [new frac([
-                [
-                    [1, 1],
-                    ['pi', 1],
-                ]
-            ], [
-                [
-                    [30, 1]
-                ]
-            ], { func: 'cos', flag: 'parent' }), 2],
-            ['phi', 'psi'],
-            [2, 2]
-        ]
-    ], [
-        [
-            [3, new frac(2, 3)],
-            [10, 1]
-        ]
-    ], { flag: 'boo' })
+    // const st = performance.now();
+    // const a = new frac([
+    //     [
+    //         [25]
+    //     ], [
+    //         [10],
+    //         [new frac([
+    //             [
+    //                 [1, 1],
+    //                 ['pi', 1],
+    //             ]
+    //         ], [
+    //             [
+    //                 [30, 1]
+    //             ]
+    //         ], { func: 'cos', flag: 'parent' }), 2],
+    //         ['phi', 'psi'],
+    //         [2, 2]
+    //     ]
+    // ], [
+    //     [
+    //         [3, new frac(2, 3)],
+    //         [10, 1]
+    //     ]
+    // ], { flag: 'boo' })
 
     // const a = new frac([
     //     [
@@ -1726,7 +1726,7 @@ setTimeout(() => {
     // ], { func: 'sin', flag: 'parent', doNotProcess: true})
     // const b = fracTwoAdd(new frac([[[1, 1]]], [[[6, 1], ['pi', 1]]]), new frac([[[1, 1]]], [[[4, 1], ['pi', 1]]]));
     // console.log(b.stringify());
-    console.log('performance: ', performance.now() - st);
+    // console.log('performance: ', performance.now() - st);
 }, 100);
 
 //housekeeping
