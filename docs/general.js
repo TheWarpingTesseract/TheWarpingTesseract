@@ -800,7 +800,7 @@ ASCIIloading = {
 
     function fracPow(a, b) {
         if (typeof a == "object") {
-            if (typeof b == 'number') b = new frac(b, 1)
+            b = toFrac(b);
             const result = [];
             const ndArray = [a.n, a.d];
             for (let ndI in ndArray) {
@@ -815,7 +815,13 @@ ASCIIloading = {
                     }
                     newNd.push(newTerm);
                 } else {
-                    newNd.push([[new frac(nd, [[[1, 1]]]), b]])
+                    if (nd.length == 2 && b.value() == 2) {
+                        console.log('a+b^2')
+                        const g = fracMultiply(toFrac(nd), toFrac(nd));
+                        newNd.push(...g.n)
+                    }
+                    else
+                        newNd.push([[new frac(nd, [[[1, 1]]]), b]])
                 }
                 result.push(newNd);
             }
@@ -899,7 +905,7 @@ ASCIIloading = {
         return fracTwoAdd(fracTwoMultiply(tmp2, 3), fracTwoMultiply(fracPow(tmp2, 3), -4))
     }
 
-    function tan2x(arg){
+    function tan2x(arg) {
         const tmp = fracTwoMultiply(arg, new frac([[['pi', 1]]], [[[2, 1]]]))
         const tmp2 = new frac(tmp.n, tmp.d, { func: 'tan' })
         return fracTwoMultiply(fracTwoMultiply(tmp2, 2), fracTwoAdd(1, fracTwoMultiply(-1, fracPow(tmp2, 2))).reciprocal())
@@ -1086,7 +1092,7 @@ class frac {
 
             //serialize the frac object into latex
             this.stringify = function (factor = undefined) {
-                // console.log(cloneObj(arr1), cloneObj(arr2))
+                if (factor == undefined) console.log(this)
                 if (factor != undefined) {
                     switch (typeof factor) {
                         case "number":
@@ -1103,7 +1109,7 @@ class frac {
                 if (!Dis1) str += '\\frac'
 
                 for (let nd in ndArray) {
-                    if (ndArray[nd].length == 1 && ndArray[nd][0][0][0] == 1) {
+                    if (ndArray[nd].length == 1 && ndArray[nd][0].length == 1 && ndArray[nd][0][0][0] == 1) {
                         if (nd == 0) {
                             str += '{1}'
                             continue;
@@ -1120,7 +1126,6 @@ class frac {
                         for (let factorI in term) {
                             const factor = term[factorI];
                             let base = this.stringify(factor[0]);
-
                             if (typeof factor[1] == "object" && factor[1].simple) {
                                 const power = [
                                     factor[1].n[0][0][0],
@@ -1227,6 +1232,29 @@ class frac {
                 //scrub any redundant factors.
                 this.scrubUnities();
 
+                //evaluate certain terms
+                for (let ndI in ndArray) {
+                    const nd = ndArray[ndI];
+                    const termsToScrub = [];
+                    const newTerms = [];
+                    for (let termI in nd) {
+                        const term = nd[termI]
+                        let simplify = false;
+                        for (let factor of term)
+                            if (typeof factor[0] == 'object' && !(factor[0].d.length == 1 && factor[0].d[0][0][0] == 1) && !factor[0].func) simplify = true;
+                        if (simplify) {
+                            let product = new frac(1, 1)
+                            for (let factor of term)
+                                product = fracTwoMultiply(product, fracPow(factor[0], factor[1]));
+                            termsToScrub.push(termI);
+                            for (let term of product.n)
+                                newTerms.push([...term, [toFrac(product.d).reciprocal(), 1]])
+                        }
+                    }
+                    this.scrubIndices(nd, termsToScrub);
+                    nd.push(...newTerms);
+                }
+
                 //combine like terms
                 for (let ndI in ndArray) {
                     const nd = ndArray[ndI]
@@ -1274,8 +1302,7 @@ class frac {
                     }
                     this.scrubIndices(nd, termsToScrub);
                 }
-
-                this.scrubUnities()
+                this.scrubUnities();
             };
 
             //factorize all terms
@@ -1471,7 +1498,6 @@ class frac {
                     }
                 }
 
-
                 //organize factors in the order of whole numbers, radicals, and constants
                 for (let nd of ndArray) {
                     loop1: for (let term of nd) {
@@ -1514,7 +1540,6 @@ class frac {
                     arr2 = result.d;
                     this.simple = result.simple;
                     this.assignNd();
-                    this.flag = 'evalFunc';
                 }
 
                 //obtain the coefficient of pi in the angle expression
@@ -1540,7 +1565,7 @@ class frac {
                 }
 
                 //check if the angle exists in the standard angle definitions
-                const checkStandardAngles =  (coeff, index) =>{
+                const checkStandardAngles = (coeff, index) => {
                     if (allStdAngles.includes(coeff.stringify())) {
                         replaceArgWithResult(standardAngles[coeff.stringify()][index]);
                         return true;
@@ -1551,7 +1576,7 @@ class frac {
                 //evaluate the function
                 const constructAngle = (func2x, func1_2x, func3x, index) => {
                     const coeff = coefficientOfPi();
-                    console.log(this.flag, coeff.stringify())
+                    // console.log(this.flag, coeff.stringify())
                     if (!checkStandardAngles(coeff, index) && checkIfConstructible(coeff)) {
                         //attempt to obtain an expression for the trig function;
 
@@ -1575,7 +1600,7 @@ class frac {
                             else if (power2 < 0) {
                                 replaceArgWithResult(func1_2x(coeff))
                             }
-                            else if(power3 > 0){
+                            else if (power3 > 0) {
                                 replaceArgWithResult(func3x(coeff))
                             }
                             break;
@@ -1635,13 +1660,28 @@ class frac {
         this.assignDefVal();
         this.checkIfSimple();
         if (!modifiers.doNotProcess) {
+            const a = 'boo'
             if (!this.simple) {
+                if (this.flag == a) { this.testRender({ note: 'input' }); console.log(cloneObj(this)) }
+
                 this.consolidate();
+                if (this.flag == a) this.testRender({ note: 'consolidate' })
+
                 this.factorize();
+                if (this.flag == a) this.testRender({ note: 'factorize' })
+
                 this.simplify();
+                if (this.flag == a) this.testRender({ note: 'simplify' })
+
                 this.humanize();
+                if (this.flag == a) this.testRender({ note: 'output' })
+
             }
-            if (this.func) this.evalFunc();
+            if (this.func) {
+                this.evalFunc();
+                console.log('here')
+                if (this.flag == a) this.testRender({ note: 'evalFunc' })
+            }
         }
     }
 }
@@ -1649,46 +1689,43 @@ class frac {
 //experimental
 setTimeout(() => {
     const st = performance.now();
-    // cos1_5.testRender();
-    // const h = fracPow(cos1_5, 2);
-    // h.testRender();
-    // console.log(h)
-    // const a = new frac([
-    //     [
-    //         [25]
-    //     ], [
-    //         [10],
-    //         [new frac([
-    //             [
-    //                 [8],
-    //                 ['pi'],
-    //             ]
-    //         ], [
-    //             [
-    //                 [5]
-    //             ]
-    //         ], { func: 'cos' , flag:'parent'}), new frac(2, 1)]
-    //     ]
-    // ], [
-    //     [
-    //         [3, new frac(2, 3)]
-    //     ]
-    // ], { flag: 'boo' })
-
     const a = new frac([
         [
-            [9],
-            ['pi'],
+            [25]
+        ], [
+            [10],
+            [new frac([
+                [
+                    [1, 1],
+                    ['pi', 1],
+                ]
+            ], [
+                [
+                    [30, 1]
+                ]
+            ], { func: 'cos', flag: 'parent' }), 2],
+            ['phi', 'psi'],
+            [2, 2]
         ]
     ], [
         [
-            [30]
+            [3, new frac(2, 3)],
+            [10, 1]
         ]
-    ], { func: 'tan', flag: 'parent' })
+    ], { flag: 'boo' })
+
+    // const a = new frac([
+    //     [
+    //         [1],
+    //         ['pi'],
+    //     ]
+    // ], [
+    //     [
+    //         [15]
+    //     ]
+    // ], { func: 'sin', flag: 'parent', doNotProcess: true})
     // const b = fracTwoAdd(new frac([[[1, 1]]], [[[6, 1], ['pi', 1]]]), new frac([[[1, 1]]], [[[4, 1], ['pi', 1]]]));
     // console.log(b.stringify());
-    a.testRender();
-    console.log(a.value())
     console.log('performance: ', performance.now() - st);
 }, 100);
 
